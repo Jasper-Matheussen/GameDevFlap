@@ -1,15 +1,15 @@
 ﻿using System;
 namespace gamedevGame.Animation
 {
-    public class Animation
+    public class Animatie
     {
         public AnimationFrame CurrentFrame { get; set; }
 
         private List<AnimationFrame> frames;
-
+        private double secondCounter = 0;
         private int counter;
 
-        public Animation()
+        public Animatie()
         {
             frames = new List<AnimationFrame>();
         }
@@ -20,10 +20,18 @@ namespace gamedevGame.Animation
             CurrentFrame = frames[0];
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             CurrentFrame = frames[counter];
-            counter++;
+
+            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            int fps = 15;
+
+            if (secondCounter >= 1d / fps)
+            {
+                counter++;
+                secondCounter = 0;
+            }
 
             if (counter >= frames.Count)
                 counter = 0;
