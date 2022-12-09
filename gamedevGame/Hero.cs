@@ -9,73 +9,73 @@ using gamedevGame.LevelDesign;
 
 namespace gamedevGame
 {
-    enum direction
+    internal enum Direction
     {
         Right,
         Left
     }
     public class Hero : IGameObject, IMovable
     {
-        Texture2D heroTexture;
-        Texture2D hitBoxTexture;
-        Animatie animatie;
-        Animatie animatieLeft;
-        private MovementManager movementManager;
+        private readonly Texture2D _heroTexture;
+        private readonly Texture2D _hitBoxTexture;
+        private readonly Animatie _animatie;
+        private readonly Animatie _animatieLeft;
+        private readonly MovementManager _movementManager;
 
-        public Rectangle hitboxHero;
+        public Rectangle HitboxHero;
 
-        private direction facing;
+        private Direction _facing;
 
         //The heros Width and Height on the spriteSheet
-        private int widthHero = 50;
-        private int heightHero = 43;
+        private readonly int _widthHero = 50;
+        private readonly int _heightHero = 43;
 
-        public int hitboxWidth;
-        public int hitboxHeight;
+        public int HitboxWidth;
+        public int HitboxHeight;
 
-        public int health = 4;
+        public int Health = 4;
 
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
         public IIinputReader InputReader { get; set; }
-        public Vector2 toekomstigePos { get; set; }
-        public Block testBlock { get; set; }
-        public Rectangle hitbox { get; set; }
-        public Vector2 gravityPull { get; set; }
+        public Vector2 ToekomstigePos { get; set; }
+        public Block TestBlock { get; set; }
+        public Rectangle Hitbox { get; set; }
+        public Vector2 GravityPull { get; set; }
 
         public Hero(Texture2D texture, Texture2D hitBoxTexture, IIinputReader inputReader, Block testblock)
         {
             //hitbox is voorlopig even groot als de sprite
-            hitboxWidth = widthHero;
-            hitboxHeight = heightHero;
+            HitboxWidth = _widthHero;
+            HitboxHeight = _heightHero;
 
-            heroTexture = texture;
-            this.hitBoxTexture = hitBoxTexture;
+            _heroTexture = texture;
+            this._hitBoxTexture = hitBoxTexture;
             InputReader = inputReader;
-            animatie = new Animatie();
-            animatieLeft = new Animatie();
+            _animatie = new Animatie();
+            _animatieLeft = new Animatie();
             Position = new Vector2(50, 150);
-            gravityPull = new Vector2(0, 0);
+            GravityPull = new Vector2(0, 0);
 
-            this.testBlock = testblock;
-            hitbox = hitboxHero;
+            this.TestBlock = testblock;
+            Hitbox = HitboxHero;
             
             Speed = new Vector2(2, 2);
-            movementManager = new MovementManager();
+            _movementManager = new MovementManager();
 
             //Looping 4 times to add 4 frames
             int nextFrame = 0;
             for (int frames = 0; frames < 4; frames++)
             {
-                animatie.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, widthHero, heightHero)));
-                nextFrame += widthHero;
+                _animatie.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
+                nextFrame += _widthHero;
             }
             //Creating frames for going left animation
             for (int i = 0; i < 4; i++)
             {
                 Console.WriteLine(nextFrame);
-                animatieLeft.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, widthHero, heightHero)));
-                nextFrame += widthHero;
+                _animatieLeft.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
+                nextFrame += _widthHero;
             }
            
         }
@@ -83,63 +83,63 @@ namespace gamedevGame
         public void Update(GameTime gameTime)
         {       
             Move();
-            animatie.Update(gameTime);
-            animatieLeft.Update(gameTime);
-            hitboxHero = new Rectangle((int)Position.X, (int)Position.Y, widthHero, heightHero);
-            hitbox = hitboxHero;
+            _animatie.Update(gameTime);
+            _animatieLeft.Update(gameTime);
+            HitboxHero = new Rectangle((int)Position.X, (int)Position.Y, _widthHero, _heightHero);
+            Hitbox = HitboxHero;
             GetDirection();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             // Dit nog veranderen if statement verhuizen naar method currentAnimation die de current frame zal return afhankelijk van de direction
-            if (facing == direction.Left)
+            if (_facing == Direction.Left)
             {
-                spriteBatch.Draw(heroTexture, Position, animatieLeft.CurrentFrame.SourceRectangle, Color.White);
+                spriteBatch.Draw(_heroTexture, Position, _animatieLeft.CurrentFrame.SourceRectangle, Color.White);
             }
             else
             {
-                spriteBatch.Draw(heroTexture, Position, animatie.CurrentFrame.SourceRectangle, Color.White);
+                spriteBatch.Draw(_heroTexture, Position, _animatie.CurrentFrame.SourceRectangle, Color.White);
             }
             
 
-            spriteBatch.Draw(hitBoxTexture, hitboxHero, Color.Transparent);
+            spriteBatch.Draw(_hitBoxTexture, HitboxHero, Color.Transparent);
         }
 
         private void Move()
         { 
-            movementManager.Move(this);
+            _movementManager.Move(this);
         }
 
         private void GetDirection()
         {
             if (InputReader.ReadInput().X == -1)
             {
-                facing = direction.Left;
+                _facing = Direction.Left;
                 ChangeGravity();
             }
             else if(InputReader.ReadInput().X == 1)
             {
-                facing = direction.Right;
+                _facing = Direction.Right;
                 ChangeGravity();
             }
         }
 
         private void ChangeGravity()
         {
-            Vector2 newGravity = this.gravityPull;
-            switch (facing)
+            Vector2 newGravity = this.GravityPull;
+            switch (_facing)
             {
-                case direction.Left:
+                case Direction.Left:
                     newGravity.X = -1;
                     break;
-                case direction.Right:
+                case Direction.Right:
                     newGravity.X = 1;
                     break;
                 default:
                     break;
             }
-            this.gravityPull = newGravity;
+            this.GravityPull = newGravity;
         }
 
     }

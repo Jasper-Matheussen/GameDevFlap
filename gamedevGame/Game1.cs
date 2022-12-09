@@ -8,19 +8,19 @@ using static System.Reflection.Metadata.BlobBuilder;
 namespace gamedevGame;
 public class Game1 : Game
 {
-    private GraphicsDeviceManager _graphics;
+    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    
-    Hero hero;
-    Texture2D texture;
+
+    private Hero _hero;
+    private Texture2D _texture;
 
     //block
-    Block testBlock;
+    private Block _testBlock;
 
-    LevelCreator testlevel;
+    private LevelCreator _testlevel;
 
     //hitbox test
-    Texture2D hitBoxHeroTexture;
+    private Texture2D _hitBoxHeroTexture;
 
 
     public Game1()
@@ -46,9 +46,9 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        texture = Content.Load<Texture2D>("spritesheet2");
-        hitBoxHeroTexture = new Texture2D(GraphicsDevice, 1, 1);
-        hitBoxHeroTexture.SetData(new[] { Color.White });
+        _texture = Content.Load<Texture2D>("spritesheet2");
+        _hitBoxHeroTexture = new Texture2D(GraphicsDevice, 1, 1);
+        _hitBoxHeroTexture.SetData(new[] { Color.White });
 
         //testBlock = BlockFactory.CreateBlock("normal", 300, 300, GraphicsDevice);
         InitializeGameObjects();
@@ -59,9 +59,9 @@ public class Game1 : Game
 
     private void InitializeGameObjects()
     {
-        hero = new Hero(texture, hitBoxHeroTexture, new KeyBoardReader(), testBlock);
-        testlevel = new LevelCreator(hero, Content);
-        testlevel.CreateBlocks();
+        _hero = new Hero(_texture, _hitBoxHeroTexture, new KeyBoardReader(), _testBlock);
+        _testlevel = new LevelCreator(_hero, Content);
+        _testlevel.CreateBlocks();
 
     }
 
@@ -73,8 +73,8 @@ public class Game1 : Game
 
         // TODO: Add your update logic here
 
-        hero.Update(gameTime);
-        testlevel.Update();
+        _hero.Update(gameTime);
+        _testlevel.Update();
         base.Update(gameTime);
         
     }
@@ -84,8 +84,8 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin();
 
-        hero.Draw(_spriteBatch);
-        testlevel.Draw(_spriteBatch);
+        _hero.Draw(_spriteBatch);
+        _testlevel.Draw(_spriteBatch);
 
         _spriteBatch.End();
 

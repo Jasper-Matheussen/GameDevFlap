@@ -9,7 +9,7 @@ namespace gamedevGame.Collision
 
         public virtual void Execute(Hero hero)
         {
-            Console.WriteLine(hero.health);
+            Console.WriteLine(hero.Health);
         }
     }
 }
