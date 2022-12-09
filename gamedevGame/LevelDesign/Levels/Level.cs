@@ -6,13 +6,13 @@ namespace gamedevGame.LevelDesign.Levels
 	public class Level
 	{
         public int[,] GameBoard { get; set; }
-        public List<Block> blocks { get; set; }
-		public bool done { get; set; } = false;
-		public Hero hero { get; set; }
+        public List<Block> Blocks { get; set; }
+		public bool Done { get; set; } = false;
+		public Hero Hero { get; set; }
 
         public Level(Hero hero)
         {
-			this.hero = hero;
+			this.Hero = hero;
         }
 
 		public void Update()
@@ -22,13 +22,13 @@ namespace gamedevGame.LevelDesign.Levels
 
 		private bool HasCollided()
 		{
-			foreach (var block in blocks)
+			foreach (var block in Blocks)
 			{
 				if (block != null)
 				{
-                    if (hero.hitbox.Intersects(block.BoundingBox))
+                    if (Hero.Hitbox.Intersects(block.BoundingBox))
                     {
-						block.IsCollidedWithEvent(hero);
+						block.IsCollidedWithEvent(Hero);
                         return true;
                     }
                 }

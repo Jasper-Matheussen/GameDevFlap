@@ -5,36 +5,36 @@ namespace gamedevGame.Animation
     {
         public AnimationFrame CurrentFrame { get; set; }
 
-        private List<AnimationFrame> frames;
-        private double secondCounter = 0;
-        private int counter;
+        private readonly List<AnimationFrame> _frames;
+        private double _secondCounter = 0;
+        private int _counter;
 
         public Animatie()
         {
-            frames = new List<AnimationFrame>();
+            _frames = new List<AnimationFrame>();
         }
 
         public void AddFrame(AnimationFrame animationFrame)
         {
-            frames.Add(animationFrame);
-            CurrentFrame = frames[0];
+            _frames.Add(animationFrame);
+            CurrentFrame = _frames[0];
         }
 
         public void Update(GameTime gameTime)
         {
-            CurrentFrame = frames[counter];
+            CurrentFrame = _frames[_counter];
 
-            secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
+            _secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
             int fps = 15;
 
-            if (secondCounter >= 1d / fps)
+            if (_secondCounter >= 1d / fps)
             {
-                counter++;
-                secondCounter = 0;
+                _counter++;
+                _secondCounter = 0;
             }
 
-            if (counter >= frames.Count)
-                counter = 0;
+            if (_counter >= _frames.Count)
+                _counter = 0;
         }
     }
 }

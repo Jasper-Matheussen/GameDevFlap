@@ -6,9 +6,9 @@ namespace gamedevGame.interfaces
 	{
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
-        public Vector2 gravityPull { get; set; }
+        public Vector2 GravityPull { get; set; }
         public IIinputReader InputReader { get; set; }
-        public Rectangle hitbox { get; set; }
+        public Rectangle Hitbox { get; set; }
 
     }
 }

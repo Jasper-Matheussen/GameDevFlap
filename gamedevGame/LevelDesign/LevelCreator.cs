@@ -7,71 +7,68 @@ namespace gamedevGame.LevelDesign
 {
 	public class LevelCreator
 	{
-        Level currentLevel;
-        int currentLevelIndex = 0;
+        private Level _currentLevel;
+        private int _currentLevelIndex = 0;
 
-        Level1 level1;
-        Level2 level2;
+        private readonly Level[] _allLevels = new Level[2];
 
-        Level[] allLevels = new Level[2];
+        private readonly List<Block> _blocks = new List<Block>();
 
-        List<Block> blocks = new List<Block>();
+        private readonly Texture2D _tileset;
 
-        Texture2D tileset;
-
-        int[,] Currentgameboard;
+        private int[,] _currentgameboard;
 
         public LevelCreator(Hero hero, ContentManager content)
 		{
-            level2 = new Level2(hero);
-            level1 = new Level1(hero);
+            var level1 = new Level1(hero);
+            var level2 = new Level2(hero);
 
-            currentLevel = level1;
-            Currentgameboard = currentLevel.GameBoard;
+            _currentLevel = level1;
+            _currentgameboard = _currentLevel.GameBoard;
 
-            allLevels[0] = level1;
-            allLevels[1] = level2;
+            _allLevels[0] = level1;
+            _allLevels[1] = level2;
             var Content = content;
-            tileset = Content.Load<Texture2D>("tilemapNew");
+            _tileset = content.Load<Texture2D>("tilemapNew");
 
         }
 
         public void CreateBlocks()
         {
-            blocks.Clear();
-            for (int l = 0; l < Currentgameboard.GetLength(0); l++)
+            _blocks.Clear();
+            for (int l = 0; l < _currentgameboard.GetLength(0); l++)
             {
-                for (int k = 0; k < Currentgameboard.GetLength(1); k++)
+                for (int k = 0; k < _currentgameboard.GetLength(1); k++)
                 {
-                    blocks.Add(BlockFactory.CreateBlock(Currentgameboard[l, k], k*50, l*50, tileset));
+                    _blocks.Add(BlockFactory.CreateBlock(_currentgameboard[l, k], k*50, l*50, _tileset));
                 }
             }
-            currentLevel.blocks = blocks;
+            _currentLevel.Blocks = _blocks;
             
         }
 
         public void Update()
         {
-            currentLevel.Update();
-            if (currentLevel.done)
+            _currentLevel.Update();
+            if (_currentLevel.Done)
             {
-                nextLevel();
+                NextLevel();
             }
             
         }
 
-        private void nextLevel()
+        private void NextLevel()
         {
-            currentLevelIndex++;
-            currentLevel = allLevels[currentLevelIndex];
-            Currentgameboard = currentLevel.GameBoard;
+            _currentLevelIndex++;
+            _currentLevel = _allLevels[_currentLevelIndex];
+            _currentgameboard = _currentLevel.GameBoard;
             CreateBlocks();
         }
 
         //Loop thru the blocks in the list and draw them if they are not null.
         public void Draw(SpriteBatch batch)
         {
-            foreach (var item in blocks)
+            foreach (var item in _blocks)
             {
                 if (item != null)
                 {

@@ -13,14 +13,14 @@ namespace gamedevGame.LevelDesign
         public Texture2D Texture { get; set; }
         public CollideWithEvent CollideWithEvent { get; set; }
 
-        public Rectangle tile;
+        public Rectangle Tile;
 
         public Block(int x, int y, Texture2D tilesetTexture)
         {
             BoundingBox = new Rectangle(x, y, 50, 50);
             Passable = false;
             Texture = tilesetTexture;
-            tile = new Rectangle(60, 5, 50, 50);
+            Tile = new Rectangle(60, 5, 50, 50);
             CollideWithEvent = new FlyCollision();
         }
 
@@ -29,12 +29,12 @@ namespace gamedevGame.LevelDesign
             BoundingBox = new Rectangle(x, y, 125, 35);
             Passable = false;
             Texture = tilesetTexture;
-            tile = new Rectangle(239, 5, 125, 35);
+            Tile = new Rectangle(239, 5, 125, 35);
             CollideWithEvent = new FlyCollision();
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, BoundingBox, tile, Color.White);
+            spriteBatch.Draw(Texture, BoundingBox, Tile, Color.White);
 
 
         }

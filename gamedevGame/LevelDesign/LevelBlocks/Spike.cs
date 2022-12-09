@@ -9,7 +9,7 @@ namespace gamedevGame.LevelDesign.LevelBlocks
             BoundingBox = new Rectangle(x, y, 60, 70);
             Passable = false;
             Texture = tilesetTexture;
-            tile = new Rectangle(227, 70, 80, 70);
+            Tile = new Rectangle(227, 70, 80, 70);
         }
     }
 }
