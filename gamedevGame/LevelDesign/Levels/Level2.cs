@@ -3,7 +3,7 @@ namespace gamedevGame.LevelDesign.Levels
 {
 	public class Level2 : Level
 	{
-		public Level2(Hero hero) : base(hero)
+		public Level2(Hero hero, ContentManager content) : base(hero, content)
         {
             GameBoard = new int[,]
            {

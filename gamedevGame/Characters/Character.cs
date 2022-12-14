@@ -1,3 +1,4 @@
+using gamedevGame.Animation;
 using gamedevGame.interfaces;
 
 namespace gamedevGame;
@@ -5,6 +6,8 @@ namespace gamedevGame;
 public class Character : IGameObject, IMovable
 {
     protected Texture2D Texture;
+    protected Animatie Animatie;
+    protected Animatie AnimatieLeft;
     
     public Vector2 Position { get; set; }
     public Vector2 Speed { get; set; }
@@ -16,6 +19,8 @@ public class Character : IGameObject, IMovable
 
     protected Character(ContentManager content)
     {
+        Animatie = new Animatie();
+        AnimatieLeft = new Animatie();
     }
     
 

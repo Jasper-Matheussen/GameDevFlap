@@ -51,7 +51,7 @@ public class Game1 : Game
             Exit();
         
         _hero.Update(gameTime);
-        _testlevel.Update();
+        _testlevel.Update(gameTime);
         base.Update(gameTime);
         
     }

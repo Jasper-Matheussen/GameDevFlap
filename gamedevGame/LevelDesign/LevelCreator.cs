@@ -19,10 +19,12 @@ namespace gamedevGame.LevelDesign
 
         private int[,] _currentgameboard;
 
+        private Character enemy;
+
         public LevelCreator(Hero hero, ContentManager content)
 		{
-            var level1 = new Level1(hero);
-            var level2 = new Level2(hero);
+            var level1 = new Level1(hero, content);
+            var level2 = new Level2(hero, content);
 
             _currentLevel = level1;
             _currentgameboard = _currentLevel.GameBoard;
@@ -31,6 +33,7 @@ namespace gamedevGame.LevelDesign
             _allLevels[1] = level2;
             _tileset = content.Load<Texture2D>("tilemapNew");
             _heartsprite = content.Load<Texture2D>("heartSprite");
+            enemy = new Enemy(new Vector2(50,50), hero, content);
 
         }
 
@@ -48,26 +51,21 @@ namespace gamedevGame.LevelDesign
             
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            _currentLevel.Update();
+            _currentLevel.Update(gameTime);
+            enemy.Update(gameTime);
             if (_currentLevel.Done)
             {
                 NextLevel();
             }
-            
         }
         
         //Loop thru the blocks in the list and draw them if they are not null.
         public void Draw(SpriteBatch batch)
         {
-            foreach (var item in _blocks)
-            {
-                if (item != null)
-                {
-                    item.Draw(batch);
-                }
-            }
+            enemy.Draw(batch);
+            _currentLevel.Draw(batch);
             DrawHearts(batch);
         }
 

@@ -12,9 +12,6 @@ namespace gamedevGame
     }
     public class Hero : Character
     {
-        private readonly Animatie _animatie;
-        private readonly Animatie _animatieLeft;
-        
         private readonly MovementManager _movementManager;
 
         private Rectangle _hitboxHero;
@@ -31,8 +28,7 @@ namespace gamedevGame
             Texture = content.Load<Texture2D>("spritesheet2");
             
             InputReader = inputReader;
-            _animatie = new Animatie();
-            _animatieLeft = new Animatie();
+
             Position = new Vector2(50, 150);
             GravityPull = new Vector2(0, 2);
             
@@ -40,20 +36,19 @@ namespace gamedevGame
             
             Speed = new Vector2(2, 2);
             _movementManager = new MovementManager();
-
             
             //Looping 4 times to add 4 frames
             int nextFrame = 0;
             for (int frames = 0; frames < 4; frames++)
             {
-                _animatie.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
+                Animatie.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
                 nextFrame += _widthHero;
             }
             //Creating frames for going left animation
             for (int i = 0; i < 4; i++)
             {
                 Console.WriteLine(nextFrame);
-                _animatieLeft.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
+                AnimatieLeft.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
                 nextFrame += _widthHero;
             }
            
@@ -62,8 +57,8 @@ namespace gamedevGame
         public override void Update(GameTime gameTime)
         {
             Move();
-            _animatie.Update(gameTime);
-            _animatieLeft.Update(gameTime);
+            Animatie.Update(gameTime);
+            AnimatieLeft.Update(gameTime);
             _hitboxHero = new Rectangle((int)Position.X, (int)Position.Y, _widthHero, _heightHero);
             Hitbox = _hitboxHero;
             GetDirection();
@@ -74,11 +69,11 @@ namespace gamedevGame
             // Dit nog veranderen if statement verhuizen naar method currentAnimation die de current frame zal return afhankelijk van de direction
             if (_facing == Direction.Left)
             {
-                spriteBatch.Draw(Texture, Position, _animatieLeft.CurrentFrame.SourceRectangle, Color.White);
+                spriteBatch.Draw(Texture, Position, AnimatieLeft.CurrentFrame.SourceRectangle, Color.White);
             }
             else
             {
-                spriteBatch.Draw(Texture, Position, _animatie.CurrentFrame.SourceRectangle, Color.White);
+                spriteBatch.Draw(Texture, Position, Animatie.CurrentFrame.SourceRectangle, Color.White);
             }
         }
 
