@@ -5,31 +5,43 @@ namespace gamedevGame.Movement;
 public class FollowHeroReader : IIinputReader
 {
     private Hero hero;
-    private Character tofollow;
-    
+    private Character follower;
+
     public FollowHeroReader(Hero followhero, IMovable movable)
     {
        hero = followhero;
-       tofollow = movable as Character;
+       follower = movable as Character;
     }
     public Vector2 ReadInput()
     {
-        Vector2 direction = Vector2.Zero;
-        if (tofollow.Position.X - hero.Position.X < 300 && tofollow.Position.X - hero.Position.X > -300)
+        
+
+        if (follower.Hitbox.Intersects(hero.Hitbox))
         {
-            if (hero.Position.X > tofollow.Position.X)
+            return Vector2.Zero;
+        }
+        else
+        {
+            Console.WriteLine(Vector2.Normalize(hero.Position - follower.Position));
+            return Vector2.Normalize(hero.Position - follower.Position);
+        }
+
+        Vector2 direction = Vector2.Zero;
+        if (follower.Position.X - hero.Position.X < 300 && follower.Position.X - hero.Position.X > -300)
+        {
+            if (hero.Position.X > follower.Position.X)
             {
                 direction.X += 1;
             }
-            else if (hero.Position.X < tofollow.Position.X)
+            else if (hero.Position.X < follower.Position.X)
             {
                 direction.X -= 1;
             }
-            if (hero.Position.Y > tofollow.Position.Y)
+            if (hero.Position.Y > follower.Position.Y)
             {
                 direction.Y += 1;
             }
-            else if (hero.Position.Y < tofollow.Position.Y)
+            else if (hero.Position.Y < follower.Position.Y)
             {
                 direction.Y -= 1;
             }
