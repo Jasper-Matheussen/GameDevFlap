@@ -22,6 +22,7 @@
     <None Remove="LevelDesign\LevelBlocks\" />
     <None Remove="LevelDesign\Levels\" />
     <None Remove="CollisionEvents\" />
+    <None Remove="Content\sprite.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

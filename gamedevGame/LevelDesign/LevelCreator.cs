@@ -13,6 +13,7 @@ namespace gamedevGame.LevelDesign
         private readonly Level[] _allLevels = new Level[2];
 
         private readonly List<Block> _blocks = new List<Block>();
+        private readonly List<Block> _backgroundBlocks = new List<Block>();
 
         private readonly Texture2D _tileset;
         private readonly Texture2D _heartsprite;
@@ -26,7 +27,7 @@ namespace gamedevGame.LevelDesign
 
             _currentLevel = level1;
             _currentgameboard = _currentLevel.GameBoard;
-
+            
             _allLevels[0] = level1;
             _allLevels[1] = level2;
             _tileset = content.Load<Texture2D>("tilemapNew");
@@ -35,6 +36,16 @@ namespace gamedevGame.LevelDesign
 
         public void CreateBlocks()
         {
+            _backgroundBlocks.Clear();
+            for (int l = 0; l < _currentLevel.Backgroundboard.GetLength(0); l++)
+            {
+                for (int k = 0; k < _currentLevel.Backgroundboard.GetLength(1); k++)
+                {
+                    _backgroundBlocks.Add(BlockFactory.CreateBlock(_currentLevel.Backgroundboard[l, k], k*50, l*50, _tileset));
+                }
+            }
+            _currentLevel.BackgroundboardBlocks = _backgroundBlocks;
+            
             _blocks.Clear();
             for (int l = 0; l < _currentgameboard.GetLength(0); l++)
             {

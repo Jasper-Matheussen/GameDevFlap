@@ -34,10 +34,10 @@ namespace gamedevGame
             
             Hitbox = _hitboxHero;
             
-            Speed = new Vector2(2, 2);
+            Speed = new Vector2(4, 2);
             _movementManager = new MovementManager();
             
-            //Looping 4 times to add 4 frames
+            //Looping 4 times to add 4 frames -> dit miss in de character class zetten zodat je het niet voor elke char hoeft te doen
             int nextFrame = 0;
             for (int frames = 0; frames < 4; frames++)
             {
@@ -51,7 +51,6 @@ namespace gamedevGame
                 AnimatieLeft.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
                 nextFrame += _widthHero;
             }
-           
         }
 
         public override void Update(GameTime gameTime)

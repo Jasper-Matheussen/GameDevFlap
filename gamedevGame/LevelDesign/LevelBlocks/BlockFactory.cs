@@ -28,6 +28,10 @@ namespace gamedevGame.LevelDesign
             {
                 newBlock = new Block(x, y, tilesetTexture, true);
             }
+            else if (type == 5)
+            {
+                newBlock = new BackgroundBlock(x,y, tilesetTexture);
+            }
  
             return newBlock;
         }

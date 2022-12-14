@@ -1,7 +1,7 @@
 using gamedevGame.Animation;
 using gamedevGame.Movement;
 
-namespace gamedevGame;
+namespace gamedevGame.Characters;
 
 public class Enemy : Character
 {
@@ -13,8 +13,8 @@ public class Enemy : Character
     MovementManager _movementManager;
     public Enemy(Vector2 startposition, Hero tofollow, ContentManager content) : base(content)
     {
-        var _followHeroReader = new FollowHeroReader(tofollow, this);
-        InputReader = _followHeroReader;
+        var followHeroReader = new FollowHeroReader(tofollow, this);
+        InputReader = followHeroReader;
         var movementManager = new MovementManager();
         _movementManager = movementManager;
         Health = 5;
@@ -26,6 +26,7 @@ public class Enemy : Character
         //testing
         Texture = content.Load<Texture2D>("spritesheet2");
         
+        //TODO: dit nog aanpassen 2x zelfde code
         int nextFrame = 0;
         for (int frames = 0; frames < 4; frames++)
         {
@@ -49,10 +50,15 @@ public class Enemy : Character
 
     public override void Draw(SpriteBatch sprite)
     {
-        sprite.Draw(Texture, Position, AnimatieLeft.CurrentFrame.SourceRectangle, Color.Red);
+        sprite.Draw(Texture, Position, CurrentDirectionAnimation(), Color.Red);
     }
 
-    public void move()
+    private Rectangle CurrentDirectionAnimation() //TODO: dit ook in parent class zetten
+    {
+        return InputReader.ReadInput().X == -1 ? AnimatieLeft.CurrentFrame.SourceRectangle : Animatie.CurrentFrame.SourceRectangle;
+    }
+
+    private void move()
     {
         _movementManager.Move(this);
     }

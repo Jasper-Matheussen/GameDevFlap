@@ -6,12 +6,14 @@ namespace gamedevGame.LevelDesign.Levels
 	public class Level
 	{
         public int[,] GameBoard { get; set; }
+        public int[,] Backgroundboard { get; set; }
         public List<Block> Blocks { get; set; }
 		public bool Done { get; set; } = false;
 		public Hero Hero { get; set; }
 		public List<Character> EnemyList { get; set; } = new List<Character>();
+		public List<Block> BackgroundboardBlocks { get; set; }
 
-        public Level(Hero hero, ContentManager content)
+		public Level(Hero hero, ContentManager content)
         {
 			this.Hero = hero;
         }
@@ -27,6 +29,12 @@ namespace gamedevGame.LevelDesign.Levels
 		
 		public void Draw(SpriteBatch spriteBatch)
 		{
+			//Draw background
+			foreach (Block block in BackgroundboardBlocks)
+			{
+				block.Draw(spriteBatch);
+			}
+			
 			foreach (Block block in Blocks)
 			{
 				if (block != null)
