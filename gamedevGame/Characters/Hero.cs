@@ -12,35 +12,36 @@ namespace gamedevGame
     }
     public class Hero : Character
     {
-        private readonly Texture2D _heroTexture;
         private readonly Animatie _animatie;
         private readonly Animatie _animatieLeft;
+        
         private readonly MovementManager _movementManager;
 
-        public Rectangle HitboxHero;
-
+        private Rectangle _hitboxHero;
         private Direction _facing;
 
         //The heros Width and Height on the spriteSheet
         private readonly int _widthHero = 50;
         private readonly int _heightHero = 43;
-        
-        public int Health = 4;
 
-        public Hero(Texture2D texture, IIinputReader inputReader)
+        public Hero(IIinputReader inputReader, ContentManager content) : base(content)
         {
-            _heroTexture = texture;
+            Health = 4;
+            
+            Texture = content.Load<Texture2D>("spritesheet2");
+            
             InputReader = inputReader;
             _animatie = new Animatie();
             _animatieLeft = new Animatie();
             Position = new Vector2(50, 150);
             GravityPull = new Vector2(0, 2);
             
-            Hitbox = HitboxHero;
+            Hitbox = _hitboxHero;
             
             Speed = new Vector2(2, 2);
             _movementManager = new MovementManager();
 
+            
             //Looping 4 times to add 4 frames
             int nextFrame = 0;
             for (int frames = 0; frames < 4; frames++)
@@ -63,8 +64,8 @@ namespace gamedevGame
             Move();
             _animatie.Update(gameTime);
             _animatieLeft.Update(gameTime);
-            HitboxHero = new Rectangle((int)Position.X, (int)Position.Y, _widthHero, _heightHero);
-            Hitbox = HitboxHero;
+            _hitboxHero = new Rectangle((int)Position.X, (int)Position.Y, _widthHero, _heightHero);
+            Hitbox = _hitboxHero;
             GetDirection();
         }
 
@@ -73,11 +74,11 @@ namespace gamedevGame
             // Dit nog veranderen if statement verhuizen naar method currentAnimation die de current frame zal return afhankelijk van de direction
             if (_facing == Direction.Left)
             {
-                spriteBatch.Draw(_heroTexture, Position, _animatieLeft.CurrentFrame.SourceRectangle, Color.White);
+                spriteBatch.Draw(Texture, Position, _animatieLeft.CurrentFrame.SourceRectangle, Color.White);
             }
             else
             {
-                spriteBatch.Draw(_heroTexture, Position, _animatie.CurrentFrame.SourceRectangle, Color.White);
+                spriteBatch.Draw(Texture, Position, _animatie.CurrentFrame.SourceRectangle, Color.White);
             }
         }
 
