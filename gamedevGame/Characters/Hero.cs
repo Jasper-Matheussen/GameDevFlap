@@ -29,7 +29,7 @@ namespace gamedevGame
             
             InputReader = inputReader;
 
-            Position = new Vector2(100, 200);
+            Position = new Vector2(320 - _widthHero, 140);
             GravityPull = new Vector2(0, 0);
             
             Hitbox = _hitboxHero;
@@ -98,18 +98,22 @@ namespace gamedevGame
         private void ChangeGravity()
         {
             Vector2 newGravity = this.GravityPull;
-            switch (_facing)
+            if (Speed != Vector2.Zero)
             {
-                case Direction.Left:
-                    newGravity.X = -1;
-                    break;
-                case Direction.Right:
-                    newGravity.X = 1;
-                    break;
-                default:
-                    break;
+                switch (_facing)
+                {
+                    case Direction.Left:
+                        newGravity.X = -1;
+                        break;
+                    case Direction.Right:
+                        newGravity.X = 1;
+                        break;
+                    default:
+                        break;
+                }
+                this.GravityPull = newGravity;
             }
-            this.GravityPull = newGravity;
+           
         }
 
     }

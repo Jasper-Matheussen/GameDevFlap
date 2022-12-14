@@ -20,8 +20,12 @@ namespace gamedevGame.LevelDesign
 
         private int[,] _currentgameboard;
 
-        public LevelCreator(Hero hero, ContentManager content)
+        public LevelCreator(Hero hero, ContentManager content, GraphicsDeviceManager graphics)
 		{
+            graphics.PreferredBackBufferWidth = 1150;
+            graphics.PreferredBackBufferHeight = 750;
+            
+            
             var level1 = new Level1(hero, content);
             var level2 = new Level2(hero, content);
 
