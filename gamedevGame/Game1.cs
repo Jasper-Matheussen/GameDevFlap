@@ -13,15 +13,8 @@ public class Game1 : Game
 
     private Hero _hero;
     private Texture2D _texture;
-
-    //block
-    private Block _testBlock;
-
+    
     private LevelCreator _testlevel;
-
-    //hitbox test
-    private Texture2D _hitBoxHeroTexture;
-
 
     public Game1()
     {
@@ -47,8 +40,6 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         _texture = Content.Load<Texture2D>("spritesheet2");
-        _hitBoxHeroTexture = new Texture2D(GraphicsDevice, 1, 1);
-        _hitBoxHeroTexture.SetData(new[] { Color.White });
 
         //testBlock = BlockFactory.CreateBlock("normal", 300, 300, GraphicsDevice);
         InitializeGameObjects();
@@ -59,7 +50,7 @@ public class Game1 : Game
 
     private void InitializeGameObjects()
     {
-        _hero = new Hero(_texture, _hitBoxHeroTexture, new KeyBoardReader(), _testBlock);
+        _hero = new Hero(_texture, new KeyBoardReader());
         _testlevel = new LevelCreator(_hero, Content);
         _testlevel.CreateBlocks();
 

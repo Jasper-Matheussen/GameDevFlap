@@ -1,10 +1,6 @@
-﻿using System;
-using gamedevGame.interfaces;
+﻿using gamedevGame.interfaces;
 using gamedevGame.Animation;
-using Microsoft.Xna.Framework;
 using gamedevGame.Movement;
-using static System.Formats.Asn1.AsnWriter;
-using gamedevGame.LevelDesign;
 
 
 namespace gamedevGame
@@ -17,7 +13,6 @@ namespace gamedevGame
     public class Hero : Character
     {
         private readonly Texture2D _heroTexture;
-        private readonly Texture2D _hitBoxTexture;
         private readonly Animatie _animatie;
         private readonly Animatie _animatieLeft;
         private readonly MovementManager _movementManager;
@@ -32,10 +27,9 @@ namespace gamedevGame
         
         public int Health = 4;
 
-        public Hero(Texture2D texture, Texture2D hitBoxTexture, IIinputReader inputReader, Block testblock)
+        public Hero(Texture2D texture, IIinputReader inputReader)
         {
             _heroTexture = texture;
-            _hitBoxTexture = hitBoxTexture;
             InputReader = inputReader;
             _animatie = new Animatie();
             _animatieLeft = new Animatie();
@@ -64,7 +58,7 @@ namespace gamedevGame
            
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             Move();
             _animatie.Update(gameTime);
@@ -74,7 +68,7 @@ namespace gamedevGame
             GetDirection();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             // Dit nog veranderen if statement verhuizen naar method currentAnimation die de current frame zal return afhankelijk van de direction
             if (_facing == Direction.Left)
@@ -85,9 +79,6 @@ namespace gamedevGame
             {
                 spriteBatch.Draw(_heroTexture, Position, _animatie.CurrentFrame.SourceRectangle, Color.White);
             }
-            
-
-            spriteBatch.Draw(_hitBoxTexture, HitboxHero, Color.Transparent);
         }
 
         private void Move()
