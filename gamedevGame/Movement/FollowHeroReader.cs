@@ -15,7 +15,7 @@ public class FollowHeroReader : IIinputReader
     public Vector2 ReadInput()
     {
         Vector2 direction = Vector2.Zero;
-        if (tofollow.Position.X - hero.Position.X < 150 && tofollow.Position.X - hero.Position.X > -150)
+        if (tofollow.Position.X - hero.Position.X < 300 && tofollow.Position.X - hero.Position.X > -300)
         {
             if (hero.Position.X > tofollow.Position.X)
             {

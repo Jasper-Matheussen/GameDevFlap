@@ -18,7 +18,11 @@ namespace gamedevGame.LevelDesign
             }
             else if (type == 2)
             {
-                newBlock = new Spike(x, y, tilesetTexture);
+                newBlock = new Spike(x, y, tilesetTexture, false);
+            }
+            else if (type == -2)
+            {
+                newBlock = new Spike(x, y, tilesetTexture, true);
             }
             else if (type == 3)
             {

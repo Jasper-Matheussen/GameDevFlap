@@ -29,8 +29,8 @@ namespace gamedevGame
             
             InputReader = inputReader;
 
-            Position = new Vector2(50, 150);
-            GravityPull = new Vector2(0, 2);
+            Position = new Vector2(100, 200);
+            GravityPull = new Vector2(0, 0);
             
             Hitbox = _hitboxHero;
             

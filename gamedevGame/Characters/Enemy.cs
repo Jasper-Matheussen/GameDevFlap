@@ -20,7 +20,7 @@ public class Enemy : Character
         Health = 5;
         Position = startposition;
         GravityPull = Vector2.Zero;
-        Speed = new Vector2(1,1);
+        Speed = new Vector2(0.5f,0.5f);
         _heroToFollow = tofollow;
         
         //testing
@@ -55,7 +55,16 @@ public class Enemy : Character
 
     private Rectangle CurrentDirectionAnimation() //TODO: dit ook in parent class zetten
     {
-        return InputReader.ReadInput().X == -1 ? AnimatieLeft.CurrentFrame.SourceRectangle : Animatie.CurrentFrame.SourceRectangle;
+        if (InputReader.ReadInput().X == 1)
+        {
+            return Animatie.CurrentFrame.SourceRectangle;
+        }
+        else if(InputReader.ReadInput().X == -1)
+        {
+            return AnimatieLeft.CurrentFrame.SourceRectangle;
+        }
+
+        return AnimatieLeft.CurrentFrame.SourceRectangle;
     }
 
     private void move()

@@ -86,7 +86,7 @@ namespace gamedevGame.LevelDesign
         {
             for (int i = 0; i < _currentLevel.Hero.Health; i++)
             {
-                batch.Draw(_heartsprite, new Vector2(i * 16, 0), new Rectangle(0, 0, 16, 15), Color.White);
+                batch.Draw(_heartsprite, new Vector2(i * 16, 10), new Rectangle(0, 0, 16, 15), Color.White);
             }
         }
 
