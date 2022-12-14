@@ -14,7 +14,7 @@ namespace gamedevGame
         Right,
         Left
     }
-    public class Hero : IGameObject, IMovable
+    public class Hero : Character
     {
         private readonly Texture2D _heroTexture;
         private readonly Texture2D _hitBoxTexture;
@@ -29,35 +29,19 @@ namespace gamedevGame
         //The heros Width and Height on the spriteSheet
         private readonly int _widthHero = 50;
         private readonly int _heightHero = 43;
-
-        public int HitboxWidth;
-        public int HitboxHeight;
-
+        
         public int Health = 4;
-
-        public Vector2 Position { get; set; }
-        public Vector2 Speed { get; set; }
-        public IIinputReader InputReader { get; set; }
-        public Vector2 ToekomstigePos { get; set; }
-        public Block TestBlock { get; set; }
-        public Rectangle Hitbox { get; set; }
-        public Vector2 GravityPull { get; set; }
 
         public Hero(Texture2D texture, Texture2D hitBoxTexture, IIinputReader inputReader, Block testblock)
         {
-            //hitbox is voorlopig even groot als de sprite
-            HitboxWidth = _widthHero;
-            HitboxHeight = _heightHero;
-
             _heroTexture = texture;
-            this._hitBoxTexture = hitBoxTexture;
+            _hitBoxTexture = hitBoxTexture;
             InputReader = inputReader;
             _animatie = new Animatie();
             _animatieLeft = new Animatie();
             Position = new Vector2(50, 150);
-            GravityPull = new Vector2(0, 0);
-
-            this.TestBlock = testblock;
+            GravityPull = new Vector2(0, 2);
+            
             Hitbox = HitboxHero;
             
             Speed = new Vector2(2, 2);
@@ -81,7 +65,7 @@ namespace gamedevGame
         }
 
         public void Update(GameTime gameTime)
-        {       
+        {
             Move();
             _animatie.Update(gameTime);
             _animatieLeft.Update(gameTime);

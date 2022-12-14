@@ -58,7 +58,6 @@ namespace gamedevGame.LevelDesign
             
         }
         
-
         //Loop thru the blocks in the list and draw them if they are not null.
         public void Draw(SpriteBatch batch)
         {
@@ -70,8 +69,6 @@ namespace gamedevGame.LevelDesign
                 }
             }
             DrawHearts(batch);
-            
-
         }
 
         private void NextLevel()
