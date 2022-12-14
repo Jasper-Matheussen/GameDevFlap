@@ -33,7 +33,6 @@ namespace gamedevGame.Movement
          
             var afstand = direction * movable.Speed;        
             movable.Position += afstand + gravityPull;
-
         }
     }
 }

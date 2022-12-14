@@ -1,4 +1,5 @@
 using gamedevGame.Animation;
+using gamedevGame.Movement;
 
 namespace gamedevGame;
 
@@ -8,12 +9,18 @@ public class Enemy : Character
     //testing
     private readonly int _widthHero = 50;
     private readonly int _heightHero = 43;
+    
+    MovementManager _movementManager;
     public Enemy(Vector2 startposition, Hero tofollow, ContentManager content) : base(content)
     {
+        var _followHeroReader = new FollowHeroReader(tofollow, this);
+        InputReader = _followHeroReader;
+        var movementManager = new MovementManager();
+        _movementManager = movementManager;
         Health = 5;
         Position = startposition;
         GravityPull = Vector2.Zero;
-        Speed = Vector2.Zero;
+        Speed = new Vector2(1,1);
         _heroToFollow = tofollow;
         
         //testing
@@ -28,7 +35,6 @@ public class Enemy : Character
         //Creating frames for going left animation
         for (int i = 0; i < 4; i++)
         {
-            Console.WriteLine(nextFrame);
             AnimatieLeft.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
             nextFrame += _widthHero;
         }
@@ -36,6 +42,7 @@ public class Enemy : Character
     
     public override void Update(GameTime gameTime)
     { 
+        move();
         Animatie.Update(gameTime);
         AnimatieLeft.Update(gameTime);
     }
@@ -44,4 +51,10 @@ public class Enemy : Character
     {
         sprite.Draw(Texture, Position, AnimatieLeft.CurrentFrame.SourceRectangle, Color.Red);
     }
+
+    public void move()
+    {
+        _movementManager.Move(this);
+    }
+    
 }
