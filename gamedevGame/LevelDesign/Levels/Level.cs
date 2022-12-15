@@ -76,7 +76,7 @@ namespace gamedevGame.LevelDesign.Levels
 				{
                     if (Hero.Hitbox.Intersects(block.BoundingBox))
                     {
-	                    if (block.IsPortal)
+	                    if (block.IsPortal && block.BoundingBox.Contains(Hero.Hitbox))
 	                    {
 		                    Done = true;
 	                    }
