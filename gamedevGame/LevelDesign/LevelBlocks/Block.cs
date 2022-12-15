@@ -12,7 +12,10 @@ namespace gamedevGame.LevelDesign
         public bool Passable { get; set; }
         public Texture2D Texture { get; set; }
         public CollideWithEvent CollideWithEvent { get; set; }
-
+        public bool IsVisible { get; set; } = true;
+        public bool IsPortal { get; set; } = false;
+        public int X { get; set; }
+        public int Y { get; set; }
         public Rectangle Tile;
 
         public Block(int x, int y, Texture2D tilesetTexture)

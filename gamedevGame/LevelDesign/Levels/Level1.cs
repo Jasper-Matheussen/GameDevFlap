@@ -48,9 +48,15 @@ namespace gamedevGame.LevelDesign.Levels
 				{ 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5 },
 			};
 			
-
         }
 
+		protected override void ChildUpdate(GameTime gameTime)
+		{
+			if (DiamondCount == 7)
+			{
+				PortalSpawned = true;
+			}
+		}
 	}
 }
 

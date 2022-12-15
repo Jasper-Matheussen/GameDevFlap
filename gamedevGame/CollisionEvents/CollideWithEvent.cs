@@ -1,15 +1,16 @@
 ﻿using System;
 using gamedevGame.interfaces;
 using gamedevGame.LevelDesign;
+using gamedevGame.LevelDesign.Levels;
 
 namespace gamedevGame.Collision
 {
     public class CollideWithEvent
     {
-        protected Block _currentblock;
+        protected readonly Block Currentblock;
         public CollideWithEvent(Block block)
         {
-            _currentblock = block;
+            Currentblock = block;
         }
         public virtual void Execute(Hero hero)
         {

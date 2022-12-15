@@ -1,5 +1,6 @@
 ﻿using System;
 using gamedevGame.CollisionEvents;
+using gamedevGame.LevelDesign.Levels;
 
 namespace gamedevGame.LevelDesign.LevelBlocks
 {
@@ -7,7 +8,12 @@ namespace gamedevGame.LevelDesign.LevelBlocks
     {
         public House(int x, int y, Texture2D tilesetTexture) : base(x, y, tilesetTexture)
         {
-            BoundingBox = new Rectangle(x, y, 125, 110);
+            IsVisible = false;
+            IsPortal = true;
+            //BoundingBox = new Rectangle(x, y, 125, 110);
+            X = x;
+            Y = y;
+            BoundingBox = new Rectangle(x, y, 0, 0);
             Passable = false;
             Texture = tilesetTexture;
             Tile = new Rectangle(5, 215, 125, 110);

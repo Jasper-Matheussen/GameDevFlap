@@ -12,7 +12,7 @@ public class CollectEvent : CollideWithEvent
     }
     public override void Execute(Hero hero)
     {
-        _currentblock.BoundingBox = new Rectangle(0, 0, 0, 0);
+        Currentblock.BoundingBox = new Rectangle(0, 0, 0, 0);
         hero.Coins++;
     }
 }
