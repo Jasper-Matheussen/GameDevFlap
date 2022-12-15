@@ -117,7 +117,12 @@ namespace gamedevGame
             }
            
         }
-
+        
+        public void Reset()
+        {
+            Position = new Vector2(320 - _widthHero, 140);
+            Coins = 0;
+        }
     }
 }
 

@@ -5,6 +5,7 @@ namespace gamedevGame.LevelDesign.Levels
 {
 	public class Level
 	{
+		public Vector2 HeroStartPosition { get; set; }
         public int[,] GameBoard { get; set; }
         public int[,] Backgroundboard { get; set; }
         public List<Block> Blocks { get; set; }
@@ -16,11 +17,13 @@ namespace gamedevGame.LevelDesign.Levels
 		protected bool PortalSpawned { get; set; } = false;
 
 		private ContentManager _content;
+		private Texture2D _heartsprite;
 		
 		public Level(Hero hero, ContentManager content)
         {
 			this.Hero = hero;
 			_content = content;
+			_heartsprite = content.Load<Texture2D>("heartSprite");
         }
 
 		public void Update(GameTime gameTime)
@@ -62,6 +65,7 @@ namespace gamedevGame.LevelDesign.Levels
 			}
 			
 			DrawDiamondCounter(spriteBatch);
+			DrawHearts(spriteBatch);
 		}
 
 		private bool HasCollided()
@@ -97,6 +101,14 @@ namespace gamedevGame.LevelDesign.Levels
 			for (int i = 0; i < DiamondCount; i++)
 			{
 				spriteBatch.Draw(tileset, new Vector2(1000 + i * 20, 10), tile, Color.White);
+			}
+		}
+		
+		private void DrawHearts(SpriteBatch batch) //TODO: this to level class
+		{
+			for (int i = 0; i < Hero.Health; i++)
+			{
+				batch.Draw(_heartsprite, new Vector2(10 + i * 16, 10), new Rectangle(0, 0, 16, 15), Color.White);
 			}
 		}
 		

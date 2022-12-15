@@ -16,7 +16,6 @@ namespace gamedevGame.LevelDesign
         private readonly List<Block> _backgroundBlocks = new List<Block>();
 
         private readonly Texture2D _tileset;
-        private readonly Texture2D _heartsprite;
 
         private int[,] _currentgameboard;
 
@@ -35,7 +34,6 @@ namespace gamedevGame.LevelDesign
             _allLevels[0] = level1;
             _allLevels[1] = level2;
             _tileset = content.Load<Texture2D>("tilemapNew");
-            _heartsprite = content.Load<Texture2D>("heartSprite");
         }
 
         public void CreateBlocks()
@@ -75,7 +73,6 @@ namespace gamedevGame.LevelDesign
         public void Draw(SpriteBatch batch)
         {
             _currentLevel.Draw(batch);
-            DrawHearts(batch);
         }
 
         private void NextLevel()
@@ -83,16 +80,14 @@ namespace gamedevGame.LevelDesign
             _currentLevelIndex++;
             _currentLevel = _allLevels[_currentLevelIndex];
             _currentgameboard = _currentLevel.GameBoard;
+            
+            //resets the hero coins and position and changes position to the starting position of the next level
+            _currentLevel.Hero.Reset();
+            _currentLevel.Hero.Position = _currentLevel.HeroStartPosition;
+            
             CreateBlocks();
         }
-
-        private void DrawHearts(SpriteBatch batch) //TODO: this to level class
-        {
-            for (int i = 0; i < _currentLevel.Hero.Health; i++)
-            {
-                batch.Draw(_heartsprite, new Vector2(10 + i * 16, 10), new Rectangle(0, 0, 16, 15), Color.White);
-            }
-        }
+        
     }
 }
 
