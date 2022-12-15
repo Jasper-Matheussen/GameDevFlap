@@ -55,16 +55,12 @@ public class Enemy : Character
 
     private Rectangle CurrentDirectionAnimation() //TODO: dit ook in parent class zetten
     {
-        if (InputReader.ReadInput().X == 1)
-        {
-            return Animatie.CurrentFrame.SourceRectangle;
-        }
-        else if(InputReader.ReadInput().X == -1)
+        //go left if input.readinput().X is positive
+        if (InputReader.ReadInput().X < 0)
         {
             return AnimatieLeft.CurrentFrame.SourceRectangle;
         }
-
-        return AnimatieLeft.CurrentFrame.SourceRectangle;
+        return Animatie.CurrentFrame.SourceRectangle;
     }
 
     private void move()
