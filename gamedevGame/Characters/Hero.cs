@@ -60,7 +60,7 @@ namespace gamedevGame
             Move();
             Animatie.Update(gameTime);
             AnimatieLeft.Update(gameTime);
-            _hitboxHero = new Rectangle((int)Position.X, (int)Position.Y, _widthHero, _heightHero);
+            _hitboxHero = new Rectangle((int)Position.X, (int)Position.Y, _widthHero-5, _heightHero -5);
             Hitbox = _hitboxHero;
             GetDirection();
         }
