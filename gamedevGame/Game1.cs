@@ -37,7 +37,6 @@ public class Game1 : Game
     private void InitializeGameObjects()
     {
         _screenSelector = new ScreenSelector(Content, graphics);
-
     }
 
     protected override void Update(GameTime gameTime)
