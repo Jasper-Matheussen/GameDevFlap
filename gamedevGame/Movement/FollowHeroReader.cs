@@ -22,7 +22,6 @@ public class FollowHeroReader : IIinputReader
         }
         else
         {
-            Console.WriteLine(Vector2.Normalize(hero.Position - follower.Position));
             return Vector2.Normalize(hero.Position - follower.Position);
         }
 

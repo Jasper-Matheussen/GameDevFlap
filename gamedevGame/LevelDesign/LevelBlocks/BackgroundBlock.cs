@@ -10,6 +10,6 @@ public class BackgroundBlock : Block
         Passable = true;
         Texture = tilesetTexture;
         Tile = new Rectangle(5, 0, 50, 50);
-        CollideWithEvent = new NoEvent();
+        CollideWithEvent = new NoEvent(this);
     }
 }

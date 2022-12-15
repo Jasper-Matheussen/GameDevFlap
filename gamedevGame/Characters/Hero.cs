@@ -20,6 +20,8 @@ namespace gamedevGame
         //The heros Width and Height on the spriteSheet
         private readonly int _widthHero = 50;
         private readonly int _heightHero = 43;
+        
+        public int Coins { get; set; }
 
         public Hero(IIinputReader inputReader, ContentManager content) : base(content)
         {

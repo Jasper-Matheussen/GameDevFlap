@@ -11,7 +11,7 @@ namespace gamedevGame.LevelDesign.LevelBlocks
             Passable = false;
             Texture = tilesetTexture;
             Tile = new Rectangle(5, 215, 125, 110);
-            CollideWithEvent = new NoEvent();
+            CollideWithEvent = new NoEvent(this);
         }
     }
 }

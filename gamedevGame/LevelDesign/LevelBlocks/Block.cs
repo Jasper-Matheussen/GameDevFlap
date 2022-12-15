@@ -21,7 +21,7 @@ namespace gamedevGame.LevelDesign
             Passable = false;
             Texture = tilesetTexture;
             Tile = new Rectangle(60, 5, 50, 50);
-            CollideWithEvent = new FlyCollision();
+            CollideWithEvent = new FlyCollision(this);
         }
 
         public Block(int x, int y, Texture2D tilesetTexture, bool platform) //platform block
@@ -30,7 +30,7 @@ namespace gamedevGame.LevelDesign
             Passable = false;
             Texture = tilesetTexture;
             Tile = new Rectangle(239, 5, 125, 35);
-            CollideWithEvent = new FlyCollision();
+            CollideWithEvent = new FlyCollision(this);
         }
         public void Draw(SpriteBatch spriteBatch)
         {

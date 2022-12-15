@@ -36,6 +36,10 @@ namespace gamedevGame.LevelDesign
             {
                 newBlock = new BackgroundBlock(x,y, tilesetTexture);
             }
+            else if (type == 6)
+            {
+                newBlock = new Diamond(x, y, tilesetTexture);
+            }
  
             return newBlock;
         }
