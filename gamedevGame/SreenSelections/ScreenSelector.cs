@@ -13,6 +13,7 @@ public class ScreenSelector : IGameObject
     private Hero _hero;
     private LevelCreator _levelCreator;
     private Menu _menu;
+    private bool Ispause;
 
     public ScreenSelector(ContentManager content, GraphicsDeviceManager grahics)
     {
@@ -25,6 +26,7 @@ public class ScreenSelector : IGameObject
     
     public void Update(GameTime gameTime)
     {
+        DetectPause();
         switch (GameState)
         {
             case GameState.Menu:
@@ -41,8 +43,12 @@ public class ScreenSelector : IGameObject
                 //Do game over stuff
                 break;
             case GameState.Playing:
-                _hero.Update(gameTime);
-                _levelCreator.Update(gameTime);
+                if (!Ispause)
+                {
+                    _hero.Update(gameTime);
+                    _levelCreator.Update(gameTime);
+                }
+               
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -68,6 +74,20 @@ public class ScreenSelector : IGameObject
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
+        }
+    }
+    
+    public void DetectPause()
+    {
+        //if keyboard P is pressed then pause
+        KeyboardState keyboardState = Keyboard.GetState();
+        if (keyboardState.IsKeyDown(Keys.P))
+        {
+            Ispause = true;
+        }
+        if (keyboardState.IsKeyDown(Keys.O) || keyboardState.IsKeyDown(Keys.Space))
+        {
+            Ispause = false;
         }
     }
 }
