@@ -1,6 +1,7 @@
 ﻿using System;
 using gamedevGame.interfaces;
 using gamedevGame.LevelDesign;
+using gamedevGame.LevelDesign.LevelBlocks;
 using gamedevGame.LevelDesign.Levels;
 
 namespace gamedevGame.Collision

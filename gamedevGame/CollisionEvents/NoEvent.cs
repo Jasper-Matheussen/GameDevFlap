@@ -3,6 +3,7 @@ using gamedevGame.Collision;
 using gamedevGame.CollisionEvents;
 using gamedevGame.interfaces;
 using gamedevGame.LevelDesign;
+using gamedevGame.LevelDesign.LevelBlocks;
 
 namespace gamedevGame.CollisionEvents
 {

@@ -30,7 +30,7 @@ namespace gamedevGame.LevelDesign
             }
             else if (type == 4)
             {
-                newBlock = new Block(x, y, tilesetTexture, true);
+                newBlock = new Block(x, y, tilesetTexture, BlockType.Platform);
             }
             else if (type == 5)
             {
@@ -39,6 +39,10 @@ namespace gamedevGame.LevelDesign
             else if (type == 6)
             {
                 newBlock = new Diamond(x, y, tilesetTexture);
+            }
+            else if (type == 7)
+            {
+                newBlock = new Block(x, y, tilesetTexture, BlockType.BlueBlock);
             }
  
             return newBlock;

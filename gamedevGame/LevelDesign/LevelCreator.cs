@@ -1,7 +1,5 @@
-﻿using System;
-using System.Reflection.Metadata;
+﻿using gamedevGame.LevelDesign.LevelBlocks;
 using gamedevGame.LevelDesign.Levels;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace gamedevGame.LevelDesign
 {
@@ -23,8 +21,7 @@ namespace gamedevGame.LevelDesign
 		{
             graphics.PreferredBackBufferWidth = 1150;
             graphics.PreferredBackBufferHeight = 750;
-            
-            
+
             var level1 = new Level1(hero, content);
             var level2 = new Level2(hero, content);
 

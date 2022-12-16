@@ -52,8 +52,10 @@ namespace gamedevGame.LevelDesign.Levels
 
 		protected override void ChildUpdate(GameTime gameTime)
 		{
-			if (DiamondCount == 7)
+			if (DiamondCount == 1)
 			{
+				//TODO: temp remove this in final game
+				Done = true;
 				PortalSpawned = true;
 			}
 		}

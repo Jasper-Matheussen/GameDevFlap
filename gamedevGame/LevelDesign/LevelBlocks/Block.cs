@@ -1,12 +1,16 @@
-﻿using System;
-using gamedevGame.Collision;
+﻿using gamedevGame.Collision;
 using gamedevGame.CollisionEvents;
 using gamedevGame.interfaces;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace gamedevGame.LevelDesign
+namespace gamedevGame.LevelDesign.LevelBlocks;
+
+public enum BlockType
 {
-	public class Block : ICollisonable
+    Platform,
+    GreyBlock,
+    BlueBlock,
+}
+public class Block : ICollisonable
 	{
         public Rectangle BoundingBox { get; set; }
         public bool Passable { get; set; }
@@ -27,13 +31,24 @@ namespace gamedevGame.LevelDesign
             CollideWithEvent = new FlyCollision(this);
         }
 
-        public Block(int x, int y, Texture2D tilesetTexture, bool platform) //platform block
+        public Block(int x, int y, Texture2D tilesetTexture, BlockType type) //platform block
         {
-            BoundingBox = new Rectangle(x, y, 125, 35);
-            Passable = false;
+            switch (type)
+            {
+                case BlockType.Platform:
+                    BoundingBox = new Rectangle(x, y, 125, 35);
+                    Passable = false;
+                    Tile = new Rectangle(239, 5, 125, 35);
+                    CollideWithEvent = new FlyCollision(this);
+                    break;
+                case BlockType.BlueBlock:
+                    BoundingBox = new Rectangle(x, y, 50, 50);
+                    Passable = false;
+                    Tile = new Rectangle(182, 5, 50, 50);
+                    CollideWithEvent = new FlyCollision(this);
+                    break;
+            }
             Texture = tilesetTexture;
-            Tile = new Rectangle(239, 5, 125, 35);
-            CollideWithEvent = new FlyCollision(this);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -45,6 +60,5 @@ namespace gamedevGame.LevelDesign
         {
             CollideWithEvent.Execute(collider);
         }
-    }
 }
 

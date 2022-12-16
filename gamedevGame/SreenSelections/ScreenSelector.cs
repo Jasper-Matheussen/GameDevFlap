@@ -77,7 +77,7 @@ public class ScreenSelector : IGameObject
         }
     }
     
-    public void DetectPause()
+    private void DetectPause()
     {
         //if keyboard P is pressed then pause
         KeyboardState keyboardState = Keyboard.GetState();

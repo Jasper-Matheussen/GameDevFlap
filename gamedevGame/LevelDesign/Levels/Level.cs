@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection.Metadata;
+using gamedevGame.LevelDesign.LevelBlocks;
 
 namespace gamedevGame.LevelDesign.Levels
 {
@@ -15,10 +16,10 @@ namespace gamedevGame.LevelDesign.Levels
 		public List<Block> BackgroundboardBlocks { get; set; }
 		protected int DiamondCount { get; set; }
 		protected bool PortalSpawned { get; set; } = false;
-
+		protected Texture2D Background;
 		private ContentManager _content;
 		private Texture2D _heartsprite;
-		
+
 		public Level(Hero hero, ContentManager content)
         {
 			this.Hero = hero;
@@ -37,10 +38,10 @@ namespace gamedevGame.LevelDesign.Levels
 			}
 		}
 		
-		public void Draw(SpriteBatch spriteBatch)
+		public virtual void Draw(SpriteBatch spriteBatch)
 		{
 			//Draw background
-			foreach (Block block in BackgroundboardBlocks)
+			foreach (var block in BackgroundboardBlocks.Where(block => block != null))
 			{
 				block.Draw(spriteBatch);
 			}
