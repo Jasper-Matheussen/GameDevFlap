@@ -32,6 +32,7 @@ namespace gamedevGame.LevelDesign.Levels
 		{
 			DiamondCounter();
 			HasCollided();
+			EnemyCollided();
 			ChildUpdate(gameTime);
 			foreach (Character enemy in EnemyList)
 			{
@@ -88,6 +89,21 @@ namespace gamedevGame.LevelDesign.Levels
 			}
             return false;
         }
+		
+		private void EnemyCollided()
+		{
+			foreach (var enemy in EnemyList)
+			{
+				if (enemy != null)
+				{
+					if (Hero.Hitbox.Intersects(enemy.Hitbox))
+					{
+						Hero.Position = HeroStartPosition;
+						Hero.Health--;
+					}
+				}
+			}
+		}
 
 		private void DiamondCounter()
 		{

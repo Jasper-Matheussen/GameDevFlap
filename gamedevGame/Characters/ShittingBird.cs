@@ -37,11 +37,18 @@ public class ShittingBird : Character
         base.Update(gameTime);
         Animatie.Update(gameTime);
         AnimatieLeft.Update(gameTime);
+        Hitbox = new Rectangle((int)Position.X, (int)Position.Y, _widthHero-5, _heightHero -5);
     }
     
     public override void Draw(SpriteBatch sprite)
     {
         sprite.Draw(Texture, Position, CurrentDirectionAnimation(),  Color.White);
+    }
+    
+    public void ShootShit()
+    {
+        //Implement if (Goesting)
+        
     }
 
 }

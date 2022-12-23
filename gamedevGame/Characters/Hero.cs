@@ -11,8 +11,6 @@ namespace gamedevGame.Characters
     }
     public class Hero : Character
     {
-
-        private Rectangle _hitboxHero;
         private Direction _facing;
 
         //The heros Width and Height on the spriteSheet
@@ -33,9 +31,7 @@ namespace gamedevGame.Characters
 
             Position = new Vector2(320 - _widthHero, 140);
             GravityPull = new Vector2(0, 0);
-            
-            Hitbox = _hitboxHero;
-            
+
             Speed = new Vector2(4, 2);
 
             //Looping 4 times to add 4 frames -> dit miss in de character class zetten zodat je het niet voor elke char hoeft te doen
@@ -60,8 +56,7 @@ namespace gamedevGame.Characters
             CheckIfDead();
             Animatie.Update(gameTime);
             AnimatieLeft.Update(gameTime);
-            _hitboxHero = new Rectangle((int)Position.X, (int)Position.Y, _widthHero-5, _heightHero -5);
-            Hitbox = _hitboxHero;
+            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, _widthHero-5, _heightHero -5);
             GetDirection();
         }
 

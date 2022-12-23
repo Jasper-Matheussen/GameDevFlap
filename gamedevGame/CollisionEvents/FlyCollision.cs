@@ -10,8 +10,6 @@ namespace gamedevGame.CollisionEvents
 {
 	public class FlyCollision : CollideWithEvent
 	{
-        private Vector2 _newPosition;
-
 		public override void Execute(Hero hero)
 		{
 			hero.Respawn();

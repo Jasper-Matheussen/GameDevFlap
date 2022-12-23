@@ -15,7 +15,7 @@ public class Enemy : Character
         Health = 5;
         Position = startposition;
         GravityPull = Vector2.Zero;
-        Speed = new Vector2(0.5f,0.5f);
+        Speed = new Vector2(0.3f,0.3f);
         
         Texture = content.Load<Texture2D>("spritesheet2");
         
@@ -33,14 +33,13 @@ public class Enemy : Character
             nextFrame += _widthHero;
         }
     }
-    
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
         Animatie.Update(gameTime);
         AnimatieLeft.Update(gameTime);
+        Hitbox = new Rectangle((int)Position.X, (int)Position.Y, _widthHero-5, _heightHero -5);
     }
-
     public override void Draw(SpriteBatch sprite)
     {
         sprite.Draw(Texture, Position, CurrentDirectionAnimation(),  Color.Red);
