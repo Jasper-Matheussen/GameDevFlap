@@ -13,8 +13,11 @@ public class Game1 : Game
     
     private ScreenSelector _screenSelector;
     GraphicsDeviceManager graphics;
+    public static ContentManager content { get; set; }
+    
     public Game1()
     {
+        content = Content;
         graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;

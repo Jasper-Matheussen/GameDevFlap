@@ -38,11 +38,15 @@ namespace gamedevGame.LevelDesign
             }
             else if (type == 6)
             {
-                newBlock = new Diamond(x, y, tilesetTexture);
+                newBlock = new Collectable(x, y, tilesetTexture, true);
             }
             else if (type == 7)
             {
                 newBlock = new Block(x, y, tilesetTexture, BlockType.BlueBlock);
+            }
+            else if (type == 8)
+            {
+                newBlock = new Collectable(x, y, tilesetTexture, false);
             }
  
             return newBlock;

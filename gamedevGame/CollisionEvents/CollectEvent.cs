@@ -8,12 +8,21 @@ namespace gamedevGame.CollisionEvents;
 
 public class CollectEvent : CollideWithEvent
 {
-    public CollectEvent(Block block) : base(block)
+    private bool _IsDiamond;
+    public CollectEvent(Block block, bool Isdiamond) : base(block)
     {
+        _IsDiamond = Isdiamond;
     }
     public override void Execute(Hero hero)
     {
         Currentblock.BoundingBox = new Rectangle(0, 0, 0, 0);
-        hero.Coins++;
+        if (_IsDiamond)
+        {
+            hero.Coins++;
+        }
+        else
+        {
+            hero.Health++;
+        }
     }
 }

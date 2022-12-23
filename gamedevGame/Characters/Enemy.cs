@@ -15,7 +15,7 @@ public class Enemy : Character
         Health = 5;
         Position = startposition;
         GravityPull = Vector2.Zero;
-        Speed = new Vector2(0.3f,0.3f);
+        Speed = new Vector2(0.4f,0.4f);
         
         Texture = content.Load<Texture2D>("spritesheet2");
         
