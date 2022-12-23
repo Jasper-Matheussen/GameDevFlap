@@ -1,5 +1,6 @@
 using gamedevGame.Animation;
 using gamedevGame.interfaces;
+using gamedevGame.Movement;
 
 namespace gamedevGame;
 
@@ -16,9 +17,11 @@ public class Character : IGameObject, IMovable
     public Rectangle Hitbox { get; set; }
 
     public int Health;
+    protected MovementManager MovementManager;
 
     protected Character(ContentManager content)
     {
+        MovementManager = new MovementManager();
         Animatie = new Animatie();
         AnimatieLeft = new Animatie();
     }
@@ -26,10 +29,27 @@ public class Character : IGameObject, IMovable
 
     public virtual void Update(GameTime gameTime)
     {
+        Move();
     }
 
     public virtual void Draw(SpriteBatch sprite)
     {
+    }
+    
+    protected Rectangle CurrentDirectionAnimation() //TODO: dit ook in parent class zetten
+    {
+        //go left if input.readinput().X is positive
+        if (InputReader.ReadInput().X < 0)
+        {
+            return AnimatieLeft.CurrentFrame.SourceRectangle;
+        }
+        return Animatie.CurrentFrame.SourceRectangle;
+
+    }
+    
+    public void Move()
+    {
+        MovementManager.Move(this);
     }
     
 }

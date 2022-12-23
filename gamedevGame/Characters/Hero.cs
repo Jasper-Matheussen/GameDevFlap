@@ -11,7 +11,6 @@ namespace gamedevGame.Characters
     }
     public class Hero : Character
     {
-        private readonly MovementManager _movementManager;
 
         private Rectangle _hitboxHero;
         private Direction _facing;
@@ -38,8 +37,7 @@ namespace gamedevGame.Characters
             Hitbox = _hitboxHero;
             
             Speed = new Vector2(4, 2);
-            _movementManager = new MovementManager();
-            
+
             //Looping 4 times to add 4 frames -> dit miss in de character class zetten zodat je het niet voor elke char hoeft te doen
             int nextFrame = 0;
             for (int frames = 0; frames < 4; frames++)
@@ -58,7 +56,7 @@ namespace gamedevGame.Characters
 
         public override void Update(GameTime gameTime)
         {
-            Move();
+            base.Update(gameTime);
             CheckIfDead();
             Animatie.Update(gameTime);
             AnimatieLeft.Update(gameTime);
@@ -79,12 +77,7 @@ namespace gamedevGame.Characters
                 spriteBatch.Draw(Texture, Position, Animatie.CurrentFrame.SourceRectangle, Color.White);
             }
         }
-
-        private void Move()
-        { 
-            _movementManager.Move(this);
-        }
-
+        
         private void GetDirection()
         {
             if (InputReader.ReadInput().X == -1)

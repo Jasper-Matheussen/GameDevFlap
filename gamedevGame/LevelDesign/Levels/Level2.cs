@@ -8,6 +8,9 @@ namespace gamedevGame.LevelDesign.Levels
 	{
 		public Level2(Hero hero, ContentManager content) : base(hero, content)
         {
+	        var enemy1 = new ShittingBird(content);
+	        EnemyList.Add(enemy1);
+	        
             GameBoard = new int[,]
            {
                 { 7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7 },

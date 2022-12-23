@@ -3,22 +3,20 @@ using gamedevGame.Movement;
 
 namespace gamedevGame.Characters;
 
-public class Enemy : Character
+public class ShittingBird : Character
 {
-    private readonly int _widthHero = 50;
-    private readonly int _heightHero = 43;
-    
-    public Enemy(Vector2 startposition, Hero tofollow, ContentManager content) : base(content)
+    private readonly int _widthHero = 53;
+    private readonly int _heightHero = 40;
+
+    public ShittingBird(ContentManager content) : base(content)
     {
-        var followHeroReader = new FollowHeroReader(tofollow, this);
-        InputReader = followHeroReader;
-        Health = 5;
-        Position = startposition;
+        Texture = content.Load<Texture2D>("enemybirdsprite");
+        Position = new Vector2(50 ,50);
         GravityPull = Vector2.Zero;
-        Speed = new Vector2(0.5f,0.5f);
+        Speed = new Vector2(1,0.0f);
         
-        Texture = content.Load<Texture2D>("spritesheet2");
-        
+        InputReader = new PointToPoint(this, new Vector2(45,50), new Vector2(1050, 50));
+
         //TODO: dit nog aanpassen 2x zelfde code
         int nextFrame = 0;
         for (int frames = 0; frames < 4; frames++)
@@ -40,10 +38,10 @@ public class Enemy : Character
         Animatie.Update(gameTime);
         AnimatieLeft.Update(gameTime);
     }
-
+    
     public override void Draw(SpriteBatch sprite)
     {
-        sprite.Draw(Texture, Position, CurrentDirectionAnimation(),  Color.Red);
+        sprite.Draw(Texture, Position, CurrentDirectionAnimation(),  Color.White);
     }
-    
+
 }
