@@ -14,14 +14,14 @@ public class ScreenSelector : IGameObject
     public static Hero Hero { get; set; }
     public static LevelCreator LevelCreator;
     private Menu _menu;
-    private GameOver _gameOver;
+    private EndGame _endGame;
     private bool Ispause;
 
     public ScreenSelector(ContentManager content, GraphicsDeviceManager grahics)
     {
         Hero = new Hero(new KeyBoardReader(), content);
         _menu = new Menu(content, grahics, Hero);
-        _gameOver = new GameOver(content);
+        _endGame = new EndGame(content, grahics);
         LevelCreator = new LevelCreator(Hero, content, grahics);
         LevelCreator.CreateBlocks();
         GameState = GameState.Menu;
@@ -42,10 +42,10 @@ public class ScreenSelector : IGameObject
                 }
                 break;
             case GameState.Win:
-                //Do win stuff
+                _endGame.Update(gameTime);
                 break;
             case GameState.GameOver:
-                _gameOver.Update(gameTime);
+                _endGame.Update(gameTime);
                 break;
             case GameState.Playing:
                 if (!Ispause)
@@ -68,10 +68,10 @@ public class ScreenSelector : IGameObject
                 _menu.Draw(sprite);
                 break;
             case GameState.Win:
-                //Do win stuff
+                _endGame.Draw(sprite);
                 break;
             case GameState.GameOver:
-                _gameOver.Draw(sprite);
+                _endGame.Draw(sprite);
                 break;
             case GameState.Playing:
                 Hero.Draw(sprite);

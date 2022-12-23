@@ -7,14 +7,14 @@ public class Menu : Screen
     public static bool StartGame { get; set; } = false;
     private readonly GraphicsDeviceManager _graphics;
     private Hero _hero;
-    
-    public Menu(ContentManager content, GraphicsDeviceManager graphics, Hero hero) : base(content)
+
+    public Menu(ContentManager content, GraphicsDeviceManager graphics, Hero hero) : base(content, graphics)
     {
         _hero = hero;
         hero.Speed = Vector2.Zero;
-        graphics.PreferredBackBufferHeight = 600;
-        graphics.PreferredBackBufferWidth = 600;
-        graphics.ApplyChanges();
+        Graphics.PreferredBackBufferHeight = 600;
+        Graphics.PreferredBackBufferWidth = 600;
+        Graphics.ApplyChanges();
         _graphics = graphics;
     }
 
@@ -40,6 +40,8 @@ public class Menu : Screen
             if (PlayButtonPosition.Contains(mouseState.Position))
             {
                 StartGame = true;
+                Graphics.PreferredBackBufferWidth = 1150;
+                Graphics.PreferredBackBufferHeight = 750;
                 _graphics.ApplyChanges();
                 _hero.Position = new Vector2(150, 200);
                 _hero.Speed = new Vector2(2, 1);

@@ -91,6 +91,7 @@ namespace gamedevGame.LevelDesign
             _currentLevel.Done = false;
             _currentLevelIndex = 0;
             _currentLevel = _allLevels[_currentLevelIndex];
+            _currentLevel.PortalSpawned = false;
             _currentLevel.Done = false;
             _currentgameboard = _currentLevel.GameBoard;
             _currentLevel.Hero.Reset();

@@ -1,5 +1,6 @@
 ﻿using System;
 using gamedevGame.Characters;
+using gamedevGame.SreenSelections;
 
 namespace gamedevGame.LevelDesign.Levels
 {
@@ -52,6 +53,14 @@ namespace gamedevGame.LevelDesign.Levels
 		{
 			spriteBatch.Draw(Background, new Vector2(0, 0), Color.White);
 			base.Draw(spriteBatch);
+		}
+		
+		protected override void ChildUpdate(GameTime gameTime)
+		{
+			if (DiamondCount == 1) //TODO: Change to 7
+			{
+				ScreenSelector.GameState = GameState.Win;
+			}
 		}
 	}
 }

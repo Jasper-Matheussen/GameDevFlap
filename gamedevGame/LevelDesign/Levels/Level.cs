@@ -16,7 +16,7 @@ namespace gamedevGame.LevelDesign.Levels
 		public List<Character> EnemyList { get; set; } = new List<Character>();
 		public List<Block> BackgroundboardBlocks { get; set; }
 		protected int DiamondCount { get; set; }
-		protected bool PortalSpawned { get; set; } = false;
+		public bool PortalSpawned { get; set; } = false;
 		protected Texture2D Background;
 		private ContentManager _content;
 		private Texture2D _heartsprite;
@@ -58,7 +58,6 @@ namespace gamedevGame.LevelDesign.Levels
 					block.BoundingBox = new Rectangle(block.X, block.Y, 125, 110);
 					block.Draw(spriteBatch);
 				}
-
 			}
 			Hero.Draw(spriteBatch);
 			foreach (Character enemy in EnemyList)
