@@ -7,15 +7,17 @@ public class ShittingBird : Character
 {
     private readonly int _widthHero = 53;
     private readonly int _heightHero = 40;
-
-    public ShittingBird(ContentManager content) : base(content)
+    private Color color;
+    
+    public ShittingBird(ContentManager content, Vector2 startPos, Vector2 moveTo, Vector2 speed, Color color) : base(content)
     {
+        this.color = color;
         Texture = content.Load<Texture2D>("enemybirdsprite");
-        Position = new Vector2(50 ,50);
+        Position = startPos;
         GravityPull = Vector2.Zero;
-        Speed = new Vector2(1,0.0f);
+        Speed = speed;
         
-        InputReader = new PointToPoint(this, new Vector2(45,50), new Vector2(1050, 50));
+        InputReader = new PointToPoint(this, startPos, moveTo);
 
         //TODO: dit nog aanpassen 2x zelfde code
         int nextFrame = 0;
@@ -42,7 +44,7 @@ public class ShittingBird : Character
     
     public override void Draw(SpriteBatch sprite)
     {
-        sprite.Draw(Texture, Position, CurrentDirectionAnimation(),  Color.White);
+        sprite.Draw(Texture, Position, CurrentDirectionAnimation(),  color);
     }
     
     public void ShootShit()

@@ -19,12 +19,12 @@ public class PointToPoint : IIinputReader
     public Vector2 ReadInput()
     {
         Vector2 direction = Vector2.Zero;
-        if (_movable.Position.X == _pointB.X && !_hitPointB)
+        if (_movable.Position.X >= _pointB.X && !_hitPointB)
         {
             _hitPointB = true;
             _hitPointA = false;
         }
-        if (_movable.Position.X == _pointA.X && !_hitPointA)
+        if (_movable.Position.X <= _pointA.X && !_hitPointA)
         {
             _hitPointA = true;
             _hitPointB = false;

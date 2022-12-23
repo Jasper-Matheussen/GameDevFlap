@@ -1,6 +1,7 @@
 ﻿using gamedevGame.Characters;
 using gamedevGame.LevelDesign.LevelBlocks;
 using gamedevGame.LevelDesign.Levels;
+using gamedevGame.SreenSelections;
 
 namespace gamedevGame.LevelDesign
 {
@@ -74,16 +75,24 @@ namespace gamedevGame.LevelDesign
 
         private void NextLevel()
         {
-            _currentLevelIndex++;
-            _currentLevel = _allLevels[_currentLevelIndex];
-            _currentgameboard = _currentLevel.GameBoard;
+            //if last level done change gamestate to win
+            if (_currentLevelIndex == _allLevels.Length - 1)
+            {
+                ScreenSelector.GameState = GameState.Win;
+            }
+            else
+            {
+                _currentLevelIndex++;
+                _currentLevel = _allLevels[_currentLevelIndex];
+                _currentgameboard = _currentLevel.GameBoard;
             
-            //resets the hero coins and position and changes position to the starting position of the next level
-            _currentLevel.Hero.Reset();
-            _currentLevel.Hero.Position = _currentLevel.HeroStartPosition;
-            _currentLevel.Hero.RespawnPos = _currentLevel.HeroStartPosition;
-            
-            CreateBlocks();
+                //resets the hero coins and position and changes position to the starting position of the next level
+                _currentLevel.Hero.Reset();
+                _currentLevel.Hero.Position = _currentLevel.HeroStartPosition;
+                _currentLevel.Hero.RespawnPos = _currentLevel.HeroStartPosition;
+
+                CreateBlocks();   
+            }
         }
         
         public void Reset()
