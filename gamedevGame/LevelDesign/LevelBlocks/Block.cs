@@ -1,4 +1,5 @@
-﻿using gamedevGame.Collision;
+﻿using gamedevGame.Characters;
+using gamedevGame.Collision;
 using gamedevGame.CollisionEvents;
 using gamedevGame.interfaces;
 

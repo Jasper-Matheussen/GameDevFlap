@@ -7,6 +7,7 @@ namespace gamedevGame.LevelDesign.Levels
 	{
 		public Level1(Hero hero, ContentManager content) : base(hero, content)
 		{
+			hero.RespawnPos = new Vector2(150, 200);
 			var enemy1 = new Enemy(new Vector2(850, 200), hero, content);
 			EnemyList.Add(enemy1);
 

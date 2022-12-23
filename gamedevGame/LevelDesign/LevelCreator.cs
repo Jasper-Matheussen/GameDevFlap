@@ -1,4 +1,5 @@
-﻿using gamedevGame.LevelDesign.LevelBlocks;
+﻿using gamedevGame.Characters;
+using gamedevGame.LevelDesign.LevelBlocks;
 using gamedevGame.LevelDesign.Levels;
 
 namespace gamedevGame.LevelDesign
@@ -54,7 +55,6 @@ namespace gamedevGame.LevelDesign
                 }
             }
             _currentLevel.Blocks = _blocks;
-            
         }
 
         public void Update(GameTime gameTime)
@@ -81,6 +81,21 @@ namespace gamedevGame.LevelDesign
             //resets the hero coins and position and changes position to the starting position of the next level
             _currentLevel.Hero.Reset();
             _currentLevel.Hero.Position = _currentLevel.HeroStartPosition;
+            _currentLevel.Hero.RespawnPos = _currentLevel.HeroStartPosition;
+            
+            CreateBlocks();
+        }
+        
+        public void Reset()
+        {
+            _currentLevel.Done = false;
+            _currentLevelIndex = 0;
+            _currentLevel = _allLevels[_currentLevelIndex];
+            _currentLevel.Done = false;
+            _currentgameboard = _currentLevel.GameBoard;
+            _currentLevel.Hero.Reset();
+            _currentLevel.Hero.Position = _currentLevel.HeroStartPosition;
+            _currentLevel.Hero.RespawnPos = _currentLevel.HeroStartPosition;
             
             CreateBlocks();
         }

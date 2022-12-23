@@ -1,9 +1,8 @@
-﻿using gamedevGame.interfaces;
-using gamedevGame.Animation;
+﻿using gamedevGame.Animation;
+using gamedevGame.interfaces;
 using gamedevGame.Movement;
 
-
-namespace gamedevGame
+namespace gamedevGame.Characters
 {
     internal enum Direction
     {
@@ -22,6 +21,8 @@ namespace gamedevGame
         private readonly int _heightHero = 43;
         
         public int Coins { get; set; }
+        public bool IsDead { get; set; }
+        public Vector2 RespawnPos;
 
         public Hero(IIinputReader inputReader, ContentManager content) : base(content)
         {
@@ -58,6 +59,7 @@ namespace gamedevGame
         public override void Update(GameTime gameTime)
         {
             Move();
+            CheckIfDead();
             Animatie.Update(gameTime);
             AnimatieLeft.Update(gameTime);
             _hitboxHero = new Rectangle((int)Position.X, (int)Position.Y, _widthHero-5, _heightHero -5);
@@ -122,6 +124,25 @@ namespace gamedevGame
         {
             Position = new Vector2(320 - _widthHero, 140);
             Coins = 0;
+        }
+
+        public void GameOver()
+        {
+            Reset();
+            Health = 4;
+        }
+        
+        private void CheckIfDead()
+        {
+            if (Health <= 0)
+            {
+                IsDead = true;
+            }
+        }
+        
+        public void Respawn()
+        {
+            Position = RespawnPos;
         }
     }
 }

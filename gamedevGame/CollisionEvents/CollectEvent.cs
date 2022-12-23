@@ -1,3 +1,4 @@
+using gamedevGame.Characters;
 using gamedevGame.Collision;
 using gamedevGame.interfaces;
 using gamedevGame.LevelDesign;

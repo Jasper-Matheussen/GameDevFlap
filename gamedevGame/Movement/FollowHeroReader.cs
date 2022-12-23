@@ -1,3 +1,4 @@
+using gamedevGame.Characters;
 using gamedevGame.interfaces;
 
 namespace gamedevGame.Movement;

@@ -1,7 +1,8 @@
+using gamedevGame.Characters;
 using gamedevGame.Input;
 using gamedevGame.interfaces;
 using gamedevGame.LevelDesign;
-using gamedevGame.Menu_s;
+using gamedevGame.Screens;
 
 namespace gamedevGame.SreenSelections;
 
@@ -9,30 +10,34 @@ public enum GameState { Menu, GameOver, Win, Playing };
 
 public class ScreenSelector : IGameObject
 {
-    public GameState GameState;
-    private Hero _hero;
-    private LevelCreator _levelCreator;
+    public static GameState GameState { get; set; }
+    public static Hero Hero { get; set; }
+    public static LevelCreator LevelCreator;
     private Menu _menu;
+    private GameOver _gameOver;
     private bool Ispause;
 
     public ScreenSelector(ContentManager content, GraphicsDeviceManager grahics)
     {
-        _hero = new Hero(new KeyBoardReader(), content);
-        _menu = new Menu(content, grahics, _hero);
-        _levelCreator = new LevelCreator(_hero, content, grahics);
-        _levelCreator.CreateBlocks();
+        Hero = new Hero(new KeyBoardReader(), content);
+        _menu = new Menu(content, grahics, Hero);
+        _gameOver = new GameOver(content);
+        LevelCreator = new LevelCreator(Hero, content, grahics);
+        LevelCreator.CreateBlocks();
         GameState = GameState.Menu;
     }
     
     public void Update(GameTime gameTime)
     {
         DetectPause();
+        DetectGameOver();
         switch (GameState)
         {
             case GameState.Menu:
                 _menu.Update(gameTime);
-                if (_menu.startGame)
+                if (Menu.StartGame)
                 {
+                    Console.WriteLine("Start Game");
                     GameState = GameState.Playing;
                 }
                 break;
@@ -40,13 +45,13 @@ public class ScreenSelector : IGameObject
                 //Do win stuff
                 break;
             case GameState.GameOver:
-                //Do game over stuff
+                _gameOver.Update(gameTime);
                 break;
             case GameState.Playing:
                 if (!Ispause)
                 {
-                    _hero.Update(gameTime);
-                    _levelCreator.Update(gameTime);
+                    Hero.Update(gameTime);
+                    LevelCreator.Update(gameTime);
                 }
                
                 break;
@@ -66,11 +71,11 @@ public class ScreenSelector : IGameObject
                 //Do win stuff
                 break;
             case GameState.GameOver:
-                //Do game over stuff
+                _gameOver.Draw(sprite);
                 break;
             case GameState.Playing:
-                _hero.Draw(sprite);
-                _levelCreator.Draw(sprite);
+                Hero.Draw(sprite);
+                LevelCreator.Draw(sprite);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -88,6 +93,15 @@ public class ScreenSelector : IGameObject
         if (keyboardState.IsKeyDown(Keys.O) || keyboardState.IsKeyDown(Keys.Space))
         {
             Ispause = false;
+        }
+    }
+
+    private void DetectGameOver()
+    {
+        if (Hero.IsDead)
+        {
+            GameState = GameState.GameOver;
+            Hero.IsDead = false;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection.Metadata;
+using gamedevGame.Characters;
 using gamedevGame.LevelDesign.LevelBlocks;
 
 namespace gamedevGame.LevelDesign.Levels
@@ -105,7 +106,7 @@ namespace gamedevGame.LevelDesign.Levels
 			}
 		}
 		
-		private void DrawHearts(SpriteBatch batch) //TODO: this to level class
+		private void DrawHearts(SpriteBatch batch)
 		{
 			for (int i = 0; i < Hero.Health; i++)
 			{

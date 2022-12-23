@@ -1,4 +1,5 @@
 ﻿using System;
+using gamedevGame.Characters;
 using gamedevGame.interfaces;
 using gamedevGame.LevelDesign;
 using gamedevGame.LevelDesign.LevelBlocks;
