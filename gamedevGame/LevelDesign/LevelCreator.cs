@@ -1,6 +1,7 @@
 ﻿using gamedevGame.Characters;
 using gamedevGame.LevelDesign.LevelBlocks;
 using gamedevGame.LevelDesign.Levels;
+using gamedevGame.Sound;
 using gamedevGame.SreenSelections;
 
 namespace gamedevGame.LevelDesign
@@ -79,6 +80,7 @@ namespace gamedevGame.LevelDesign
             if (_currentLevelIndex == _allLevels.Length - 1)
             {
                 ScreenSelector.GameState = GameState.Win;
+                Game1.SoundManager.Play(Sounds.Win);
             }
             else
             {

@@ -3,6 +3,7 @@ using gamedevGame.Input;
 using gamedevGame.interfaces;
 using gamedevGame.LevelDesign;
 using gamedevGame.Screens;
+using gamedevGame.Sound;
 
 namespace gamedevGame.SreenSelections;
 
@@ -102,6 +103,13 @@ public class ScreenSelector : IGameObject
         {
             GameState = GameState.GameOver;
             Hero.IsDead = false;
+            PlayGameOverSound();
         }
     }
+
+    private void PlayGameOverSound()
+    {
+        Game1.SoundManager.Play(Sounds.GameOver);
+    }
+
 }

@@ -3,6 +3,7 @@ using gamedevGame.Collision;
 using gamedevGame.interfaces;
 using gamedevGame.LevelDesign;
 using gamedevGame.LevelDesign.LevelBlocks;
+using gamedevGame.Sound;
 
 namespace gamedevGame.CollisionEvents;
 
@@ -19,9 +20,11 @@ public class CollectEvent : CollideWithEvent
         if (_IsDiamond)
         {
             hero.Coins++;
+            Game1.SoundManager.Play(Sounds.Collect);
         }
         else
         {
+            Game1.SoundManager.Play(Sounds.Heart);
             hero.Health++;
         }
     }

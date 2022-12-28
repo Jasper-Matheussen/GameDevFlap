@@ -1,13 +1,15 @@
 ﻿using System;
 using gamedevGame.Characters;
+using gamedevGame.Sound;
 
 namespace gamedevGame.LevelDesign.Levels
 {
 	public class Level1 : Level
 	{
+        bool SoundPlayed;
 		public Level1(Hero hero, ContentManager content) : base(hero, content)
-		{
-			hero.RespawnPos = new Vector2(150, 200);
+        {
+            hero.RespawnPos = new Vector2(150, 200);
 			var enemy1 = new Enemy(new Vector2(850, 200), hero, content);
 			EnemyList.Add(enemy1);
 
@@ -55,8 +57,14 @@ namespace gamedevGame.LevelDesign.Levels
 		{
 			if (DiamondCount == 7)
 			{
-				//TODO: temp remove this in final game
-				PortalSpawned = true;
+                //TODO: This in parent class zetten
+                if (!SoundPlayed)
+                {
+                    Game1.SoundManager.Play(Sounds.Next);
+                    SoundPlayed = true;
+                }
+               
+                PortalSpawned = true;
 			}
 		}
 	}

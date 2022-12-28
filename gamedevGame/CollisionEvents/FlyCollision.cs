@@ -5,6 +5,7 @@ using gamedevGame.CollisionEvents;
 using gamedevGame.interfaces;
 using gamedevGame.LevelDesign;
 using gamedevGame.LevelDesign.LevelBlocks;
+using gamedevGame.Sound;
 
 namespace gamedevGame.CollisionEvents
 {
@@ -12,9 +13,10 @@ namespace gamedevGame.CollisionEvents
 	{
 		public override void Execute(Hero hero)
 		{
-			hero.Respawn();
+            Game1.SoundManager.Play(Sounds.Hurt);
+            hero.Respawn();
             hero.Health -= 1;
-		}
+        }
 
 		public FlyCollision(Block block) : base(block)
 		{

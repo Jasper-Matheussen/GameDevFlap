@@ -1,6 +1,7 @@
 ﻿
 using gamedevGame.Input;
 using gamedevGame.LevelDesign;
+using gamedevGame.Sound;
 using gamedevGame.SreenSelections;
 using Microsoft.Xna.Framework.Graphics;
 using static System.Formats.Asn1.AsnWriter;
@@ -10,10 +11,12 @@ namespace gamedevGame;
 public class Game1 : Game
 {
     private SpriteBatch _spriteBatch;
-    
+
     private ScreenSelector _screenSelector;
     GraphicsDeviceManager graphics;
     public static ContentManager content { get; set; }
+
+    public static SoundManager SoundManager;
     
     public Game1()
     {
@@ -33,12 +36,12 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
         InitializeGameObjects();
     }
 
     private void InitializeGameObjects()
     {
+        SoundManager = new SoundManager();
         _screenSelector = new ScreenSelector(Content, graphics);
     }
 

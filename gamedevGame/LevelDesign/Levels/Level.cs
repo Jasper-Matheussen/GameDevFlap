@@ -57,7 +57,7 @@ namespace gamedevGame.LevelDesign.Levels
 				else if(block != null && block.IsPortal && !block.IsVisible && PortalSpawned)
 				{
 					block.BoundingBox = new Rectangle(block.X, block.Y, 125, 110);
-					block.Draw(spriteBatch);
+                    block.Draw(spriteBatch);
 				}
 			}
 			Hero.Draw(spriteBatch);

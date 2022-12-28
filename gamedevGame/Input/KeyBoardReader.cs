@@ -1,5 +1,6 @@
 ﻿using System;
 using gamedevGame.interfaces;
+using gamedevGame.Sound;
 
 namespace gamedevGame.Input
 {
@@ -7,9 +8,10 @@ namespace gamedevGame.Input
 	{
 
         public bool IsDestinationInput => false;
-
+        bool spaceBarPressed = false;
         public Vector2 ReadInput()
         {
+            
             KeyboardState state = Keyboard.GetState();
             Vector2 direction = Vector2.Zero;
             if (state.IsKeyDown(Keys.Left))
@@ -30,7 +32,17 @@ namespace gamedevGame.Input
             }
             if (state.IsKeyDown(Keys.Space))
             {
+                if (!spaceBarPressed)
+                {
+                    Game1.SoundManager.Play(Sounds.Flap);
+                    spaceBarPressed = true;
+                }
+
                 direction.Y -= 6;
+            }
+            else
+            {
+                spaceBarPressed = false;
             }
 
 

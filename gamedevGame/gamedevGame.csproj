@@ -37,7 +37,6 @@
   <ItemGroup>
     <Folder Include="interfaces\" />
     <Folder Include="Animation\" />
-    <Folder Include="Input\" />
     <Folder Include="Movement\" />
     <Folder Include="LevelDesign\" />
     <Folder Include="LevelDesign\LevelBlocks\" />

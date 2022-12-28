@@ -3,7 +3,6 @@ TODO:
         - Enemy moet heen en weer vliegen tussen 2 punten en iets kunnen schieten.
     - Sound toevoegen (flap sound)
     - Refactoring -> extra checken op SOLID en Design Patterns (Observer, Strategy, Factory, Singleton, etc.)
-    - Levens kunnen oprapen (powerups)
    
     
     
