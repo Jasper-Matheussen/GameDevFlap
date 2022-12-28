@@ -35,10 +35,10 @@ public class ScreenSelector : IGameObject
         switch (GameState)
         {
             case GameState.Menu:
+                MediaPlayer.IsMuted = false;
                 _menu.Update(gameTime);
                 if (Menu.StartGame)
                 {
-                    Console.WriteLine("Start Game");
                     GameState = GameState.Playing;
                 }
                 break;
@@ -46,6 +46,7 @@ public class ScreenSelector : IGameObject
                 _endGame.Update(gameTime);
                 break;
             case GameState.GameOver:
+                MediaPlayer.IsMuted = true;
                 _endGame.Update(gameTime);
                 break;
             case GameState.Playing:

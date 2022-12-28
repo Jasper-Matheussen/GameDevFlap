@@ -19,6 +19,7 @@ namespace gamedevGame.Sound
     public class SoundManager
     {
         private List<SoundEffect> soundEffects = new List<SoundEffect>();
+        private Song song;
 
         public SoundManager()
         {            
@@ -29,6 +30,7 @@ namespace gamedevGame.Sound
             soundEffects.Add(Game1.content.Load<SoundEffect>("next"));
             soundEffects.Add(Game1.content.Load<SoundEffect>("gamover"));
             soundEffects.Add(Game1.content.Load<SoundEffect>("win"));
+            song = Game1.content.Load<Song>("themesong");
         }
 
         public void Play(Sounds sound)
@@ -58,6 +60,13 @@ namespace gamedevGame.Sound
                     break;
             }
 
+        }
+
+        public void PlayThemeSong()
+        {
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.1f;
         }
     }
 }

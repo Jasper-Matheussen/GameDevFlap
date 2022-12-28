@@ -37,6 +37,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         InitializeGameObjects();
+        SoundManager.PlayThemeSong(); 
     }
 
     private void InitializeGameObjects()
