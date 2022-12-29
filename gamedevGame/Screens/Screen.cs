@@ -13,7 +13,10 @@ public class Screen : IGameObject
     
     protected Rectangle QuitButton = new Rectangle(600,620, 610,206);
     protected Rectangle QuitButtonPosition = new Rectangle(200, 270, 400 / 2, 100 / 2);
-    
+
+    protected Rectangle MuteButton = new Rectangle(1820, 620, 200, 195);
+    protected Rectangle MuteButtonPosition = new Rectangle(540, 10, 50, 50);
+
     protected GraphicsDeviceManager Graphics;
     
     protected Screen(ContentManager content, GraphicsDeviceManager graphics)

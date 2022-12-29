@@ -7,6 +7,8 @@ public class Menu : Screen
     public static bool StartGame { get; set; } = false;
     private readonly GraphicsDeviceManager _graphics;
     private Hero _hero;
+    private Color colorMuteButton = Color.Green;
+    private bool MuteClicked;
 
     public Menu(ContentManager content, GraphicsDeviceManager graphics, Hero hero) : base(content, graphics)
     {
@@ -30,6 +32,7 @@ public class Menu : Screen
         _hero.Draw(spriteBatch);
         spriteBatch.Draw(MenuSprite, PlayButtonPosition, PlayButton, Color.LightBlue);
         spriteBatch.Draw(MenuSprite, QuitButtonPosition, QuitButton, Color.Red);
+        spriteBatch.Draw(MenuSprite, MuteButtonPosition, MuteButton, colorMuteButton);
     }
 
     protected override void HandleButtonClick()
@@ -51,6 +54,28 @@ public class Menu : Screen
             {
                 Environment.Exit(0);
             }
+
+            if (MuteButtonPosition.Contains(mouseState.Position))
+            {
+                if (colorMuteButton == Color.Green && !MuteClicked)
+                {
+                    colorMuteButton = Color.Red;
+                    MediaPlayer.Pause();
+                    MuteClicked = true;
+                }
+                else if (!MuteClicked)
+                {
+                    MediaPlayer.Resume();
+                    colorMuteButton = Color.Green;
+                    MuteClicked = true;
+                }
+                
+            }
+            
+        }
+        else
+        {
+            MuteClicked = false;
         }
     }
 }
