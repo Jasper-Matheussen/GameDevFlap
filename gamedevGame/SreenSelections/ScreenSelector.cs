@@ -16,7 +16,7 @@ public class ScreenSelector : IGameObject
     public static LevelCreator LevelCreator;
     private Menu _menu;
     private EndGame _endGame;
-    private bool Ispause;
+    private bool _ispause;
 
     public ScreenSelector(ContentManager content, GraphicsDeviceManager grahics)
     {
@@ -50,7 +50,7 @@ public class ScreenSelector : IGameObject
                 _endGame.Update(gameTime);
                 break;
             case GameState.Playing:
-                if (!Ispause)
+                if (!_ispause)
                 {
                     Hero.Update(gameTime);
                     LevelCreator.Update(gameTime);
@@ -90,11 +90,11 @@ public class ScreenSelector : IGameObject
         KeyboardState keyboardState = Keyboard.GetState();
         if (keyboardState.IsKeyDown(Keys.P))
         {
-            Ispause = true;
+            _ispause = true;
         }
         if (keyboardState.IsKeyDown(Keys.O) || keyboardState.IsKeyDown(Keys.Space))
         {
-            Ispause = false;
+            _ispause = false;
         }
     }
 
@@ -108,7 +108,7 @@ public class ScreenSelector : IGameObject
         }
     }
 
-    private void PlayGameOverSound()
+    private static void PlayGameOverSound()
     {
         Game1.SoundManager.Play(Sounds.GameOver);
     }

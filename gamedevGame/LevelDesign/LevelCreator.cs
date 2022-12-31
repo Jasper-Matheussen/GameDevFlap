@@ -108,6 +108,7 @@ namespace gamedevGame.LevelDesign
             _currentLevel.Hero.Reset();
             _currentLevel.Hero.Position = _currentLevel.HeroStartPosition;
             _currentLevel.Hero.RespawnPos = _currentLevel.HeroStartPosition;
+            _currentLevel.SoundPlayed = false;
             
             CreateBlocks();
         }

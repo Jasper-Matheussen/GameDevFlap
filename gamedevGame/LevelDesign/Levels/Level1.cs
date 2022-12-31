@@ -6,9 +6,10 @@ namespace gamedevGame.LevelDesign.Levels
 {
 	public class Level1 : Level
 	{
-        bool SoundPlayed;
+        
 		public Level1(Hero hero, ContentManager content) : base(hero, content)
         {
+	        SoundPlayed = false;
             hero.RespawnPos = new Vector2(150, 200);
 			var enemy1 = new Enemy(new Vector2(850, 200), hero, content);
 			EnemyList.Add(enemy1);
@@ -52,21 +53,6 @@ namespace gamedevGame.LevelDesign.Levels
 			};
 			
         }
-
-		protected override void ChildUpdate(GameTime gameTime)
-		{
-			if (DiamondCount == 7)
-			{
-                //TODO: This in parent class zetten
-                if (!SoundPlayed)
-                {
-                    Game1.SoundManager.Play(Sounds.Next);
-                    SoundPlayed = true;
-                }
-               
-                PortalSpawned = true;
-			}
-		}
 	}
 }
 

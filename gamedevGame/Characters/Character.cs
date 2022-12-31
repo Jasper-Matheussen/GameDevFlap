@@ -10,6 +10,9 @@ public class Character : IGameObject, IMovable
     protected Animatie Animatie;
     protected Animatie AnimatieLeft;
     
+    protected int WidthCharacter;
+    protected int HeightCharacter;
+    
     public Vector2 Position { get; set; }
     public Vector2 Speed { get; set; }
     public Vector2 GravityPull { get; set; }
@@ -36,7 +39,7 @@ public class Character : IGameObject, IMovable
     {
     }
     
-    protected Rectangle CurrentDirectionAnimation() //TODO: dit ook in parent class zetten
+    protected Rectangle CurrentDirectionAnimation()
     {
         //go left if input.readinput().X is positive
         if (InputReader.ReadInput().X < 0)
@@ -51,5 +54,21 @@ public class Character : IGameObject, IMovable
     {
         MovementManager.Move(this);
     }
-    
+
+    public void CreateAnimation(int widthHero, int heightHero, int totalFrames)
+    {
+        int nextFrame = 0;
+        for (int frames = 0; frames < totalFrames; frames++)
+        {
+            Animatie.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, widthHero, heightHero)));
+            nextFrame += widthHero;
+        }
+        //Creating frames for going left animation
+        for (int i = 0; i < 4; i++)
+        {
+            Console.WriteLine(nextFrame);
+            AnimatieLeft.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, widthHero, heightHero)));
+            nextFrame += widthHero;
+        }
+    }
 }

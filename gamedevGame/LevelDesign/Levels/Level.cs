@@ -2,6 +2,7 @@
 using System.Reflection.Metadata;
 using gamedevGame.Characters;
 using gamedevGame.LevelDesign.LevelBlocks;
+using gamedevGame.Sound;
 
 namespace gamedevGame.LevelDesign.Levels
 {
@@ -18,10 +19,11 @@ namespace gamedevGame.LevelDesign.Levels
 		protected int DiamondCount { get; set; }
 		public bool PortalSpawned { get; set; } = false;
 		protected Texture2D Background;
+		public bool SoundPlayed;
 		private ContentManager _content;
 		private Texture2D _heartsprite;
 
-		public Level(Hero hero, ContentManager content)
+		protected Level(Hero hero, ContentManager content)
         {
 			this.Hero = hero;
 			_content = content;
@@ -30,6 +32,7 @@ namespace gamedevGame.LevelDesign.Levels
 
 		public void Update(GameTime gameTime)
 		{
+			NextLevelSound();
 			DiamondCounter();
 			HasCollided();
 			EnemyCollided();
@@ -70,7 +73,8 @@ namespace gamedevGame.LevelDesign.Levels
 			DrawHearts(spriteBatch);
 		}
 
-		private bool HasCollided()
+		//TODO: Collider class gebruiken?
+		private void HasCollided()
 		{
 			foreach (var block in Blocks)
 			{
@@ -83,31 +87,27 @@ namespace gamedevGame.LevelDesign.Levels
 		                    Done = true;
 	                    }
 	                    block.IsCollidedWithEvent(Hero);
-                        return true;
                     }
                 }
 			}
-            return false;
-        }
-		
+		}
 		private void EnemyCollided()
 		{
-			foreach (var enemy in EnemyList)
+			foreach (var enemy in EnemyList.Where(enemy => enemy != null).Where(enemy => Hero.Hitbox.Intersects(enemy.Hitbox)))
 			{
-				if (enemy != null)
-				{
-					if (Hero.Hitbox.Intersects(enemy.Hitbox))
-					{
-						Hero.Position = HeroStartPosition;
-						Hero.Health--;
-					}
-				}
+				Game1.SoundManager.Play(Sounds.Hurt);
+				Hero.Position = HeroStartPosition;
+				Hero.Health--;
 			}
 		}
 
 		private void DiamondCounter()
 		{
 			DiamondCount = Hero.Coins;
+			if (DiamondCount == 7)
+			{
+				PortalSpawned = true;
+			}
 		}
 		
 		private void DrawDiamondCounter(SpriteBatch spriteBatch)
@@ -131,7 +131,16 @@ namespace gamedevGame.LevelDesign.Levels
 		
 		protected virtual void ChildUpdate(GameTime gameTime)
 		{
-			//Ovveride this method in child classes
+			
+		}
+
+		protected void NextLevelSound()
+		{
+			if (!SoundPlayed && PortalSpawned)
+			{
+				Game1.SoundManager.Play(Sounds.Next);
+				SoundPlayed = true;
+			}
 		}
 	}
 }

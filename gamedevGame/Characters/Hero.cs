@@ -12,10 +12,6 @@ namespace gamedevGame.Characters
     public class Hero : Character
     {
         private Direction _facing;
-
-        //The heros Width and Height on the spriteSheet
-        private readonly int _widthHero = 50;
-        private readonly int _heightHero = 43;
         
         public int Coins { get; set; }
         public bool IsDead { get; set; }
@@ -23,31 +19,21 @@ namespace gamedevGame.Characters
 
         public Hero(IIinputReader inputReader, ContentManager content) : base(content)
         {
+            WidthCharacter = 50;
+            HeightCharacter = 43;
+            
             Health = 4;
             
             Texture = content.Load<Texture2D>("spritesheet2");
             
             InputReader = inputReader;
 
-            Position = new Vector2(320 - _widthHero, 140);
+            Position = new Vector2(320 - WidthCharacter, 140);
             GravityPull = new Vector2(0, 0);
 
             Speed = new Vector2(4, 2);
-
-            //Looping 4 times to add 4 frames -> dit miss in de character class zetten zodat je het niet voor elke char hoeft te doen
-            int nextFrame = 0;
-            for (int frames = 0; frames < 4; frames++)
-            {
-                Animatie.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
-                nextFrame += _widthHero;
-            }
-            //Creating frames for going left animation
-            for (int i = 0; i < 4; i++)
-            {
-                Console.WriteLine(nextFrame);
-                AnimatieLeft.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, _widthHero, _heightHero)));
-                nextFrame += _widthHero;
-            }
+            
+            CreateAnimation(WidthCharacter, HeightCharacter, 4);
         }
 
         public override void Update(GameTime gameTime)
@@ -56,7 +42,7 @@ namespace gamedevGame.Characters
             CheckIfDead();
             Animatie.Update(gameTime);
             AnimatieLeft.Update(gameTime);
-            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, _widthHero-5, _heightHero -5);
+            Hitbox = new Rectangle((int)Position.X, (int)Position.Y, WidthCharacter-5, HeightCharacter -5);
             GetDirection();
         }
 
@@ -110,7 +96,7 @@ namespace gamedevGame.Characters
         
         public void Reset()
         {
-            Position = new Vector2(320 - _widthHero, 140);
+            Position = new Vector2(320 - WidthCharacter, 140);
             Coins = 0;
         }
 

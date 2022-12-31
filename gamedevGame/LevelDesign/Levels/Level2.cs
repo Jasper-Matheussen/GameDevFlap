@@ -69,13 +69,6 @@ namespace gamedevGame.LevelDesign.Levels
 			base.Draw(spriteBatch);
 		}
 		
-		protected override void ChildUpdate(GameTime gameTime)
-		{
-			if (DiamondCount == 7) //TODO: Change to 7
-			{
-				PortalSpawned = true;
-			}
-		}
 	}
 }
 
