@@ -1,11 +1,7 @@
-﻿using System;
-using gamedevGame.Characters;
-using gamedevGame.interfaces;
-using gamedevGame.LevelDesign;
+﻿using gamedevGame.Characters;
 using gamedevGame.LevelDesign.LevelBlocks;
-using gamedevGame.LevelDesign.Levels;
 
-namespace gamedevGame.Collision
+namespace gamedevGame.Collision.CollisionEvents
 {
     public class CollideWithEvent
     {

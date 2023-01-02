@@ -1,11 +1,8 @@
 using gamedevGame.Characters;
-using gamedevGame.Collision;
-using gamedevGame.interfaces;
-using gamedevGame.LevelDesign;
 using gamedevGame.LevelDesign.LevelBlocks;
 using gamedevGame.Sound;
 
-namespace gamedevGame.CollisionEvents;
+namespace gamedevGame.Collision.CollisionEvents;
 
 public class CollectEvent : CollideWithEvent
 {

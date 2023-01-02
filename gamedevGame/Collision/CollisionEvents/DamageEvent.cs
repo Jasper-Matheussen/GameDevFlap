@@ -1,5 +1,4 @@
-﻿using System;
-namespace gamedevGame.CollisionEvents
+﻿namespace gamedevGame.Collision.CollisionEvents
 {
 	public class DamageEvent
 	{

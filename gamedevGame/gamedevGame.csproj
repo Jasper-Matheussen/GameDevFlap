@@ -41,7 +41,7 @@
     <Folder Include="LevelDesign\" />
     <Folder Include="LevelDesign\LevelBlocks\" />
     <Folder Include="LevelDesign\Levels\" />
-    <Folder Include="CollisionEvents\" />
+    <Folder Include="Collision\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Menu\**" />

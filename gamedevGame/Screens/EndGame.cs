@@ -38,7 +38,7 @@ public class EndGame : Screen
         {
             Menu.StartGame = false;
             ScreenSelector.Hero.GameOver();
-            ScreenSelector.LevelCreator.Reset();
+            ScreenSelector.LevelManager.Reset();
             ScreenSelector.GameState = GameState.Menu;
             
             Graphics.PreferredBackBufferWidth = 600;

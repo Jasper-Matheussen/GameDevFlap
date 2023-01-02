@@ -13,7 +13,7 @@ public class ScreenSelector : IGameObject
 {
     public static GameState GameState { get; set; }
     public static Hero Hero { get; set; }
-    public static LevelCreator LevelCreator;
+    public static LevelManager LevelManager;
     private Menu _menu;
     private EndGame _endGame;
     private bool _ispause;
@@ -23,8 +23,7 @@ public class ScreenSelector : IGameObject
         Hero = new Hero(new KeyBoardReader(), content);
         _menu = new Menu(content, grahics, Hero);
         _endGame = new EndGame(content, grahics);
-        LevelCreator = new LevelCreator(Hero, content, grahics);
-        LevelCreator.CreateBlocks();
+        LevelManager = new LevelManager(Hero, content, grahics);
         GameState = GameState.Menu;
     }
     
@@ -53,7 +52,7 @@ public class ScreenSelector : IGameObject
                 if (!_ispause)
                 {
                     Hero.Update(gameTime);
-                    LevelCreator.Update(gameTime);
+                    LevelManager.Update(gameTime);
                 }
                
                 break;
@@ -77,7 +76,7 @@ public class ScreenSelector : IGameObject
                 break;
             case GameState.Playing:
                 Hero.Draw(sprite);
-                LevelCreator.Draw(sprite);
+                LevelManager.Draw(sprite);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -98,7 +97,7 @@ public class ScreenSelector : IGameObject
         }
     }
 
-    private void DetectGameOver()
+    private static void DetectGameOver()
     {
         if (Hero.IsDead)
         {

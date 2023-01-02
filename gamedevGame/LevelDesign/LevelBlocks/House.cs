@@ -1,5 +1,6 @@
 ﻿using System;
-using gamedevGame.CollisionEvents;
+using gamedevGame.Collision;
+using gamedevGame.Collision.CollisionEvents;
 using gamedevGame.LevelDesign.Levels;
 
 namespace gamedevGame.LevelDesign.LevelBlocks

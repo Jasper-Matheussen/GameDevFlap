@@ -1,43 +1,36 @@
-﻿using gamedevGame.Characters;
-using gamedevGame.LevelDesign.LevelBlocks;
+﻿using gamedevGame.LevelDesign.LevelBlocks;
 using gamedevGame.LevelDesign.Levels;
-using gamedevGame.Sound;
-using gamedevGame.SreenSelections;
 
 namespace gamedevGame.LevelDesign
 {
 	public class LevelCreator
 	{
         private Level _currentLevel;
-        private int _currentLevelIndex = 0;
 
-        private readonly Level[] _allLevels = new Level[2];
-
-        private readonly List<Block> _blocks = new List<Block>();
-        private readonly List<Block> _backgroundBlocks = new List<Block>();
+        private readonly List<Block> _blocks = new();
+        private readonly List<Block> _backgroundBlocks = new();
 
         private readonly Texture2D _tileset;
+        
+        public int[,] Currentgameboard { get; set; }
 
-        private int[,] _currentgameboard;
 
-        public LevelCreator(Hero hero, ContentManager content, GraphicsDeviceManager graphics)
+        public LevelCreator(Level[] allLevels, ContentManager content, GraphicsDeviceManager graphics)
 		{
             graphics.PreferredBackBufferWidth = 1150;
             graphics.PreferredBackBufferHeight = 750;
-
-            var level1 = new Level1(hero, content);
-            var level2 = new Level2(hero, content);
-
-            _currentLevel = level1;
-            _currentgameboard = _currentLevel.GameBoard;
             
-            _allLevels[0] = level1;
-            _allLevels[1] = level2;
+            _currentLevel = allLevels[0];
+            Currentgameboard = _currentLevel.GameBoard;
+            
             _tileset = content.Load<Texture2D>("tilemapNew");
         }
 
-        public void CreateBlocks()
+        public void CreateBlocks(Level level)
         {
+            _currentLevel = level;
+            Currentgameboard = _currentLevel.GameBoard;
+
             _backgroundBlocks.Clear();
             for (int l = 0; l < _currentLevel.Backgroundboard.GetLength(0); l++)
             {
@@ -49,23 +42,14 @@ namespace gamedevGame.LevelDesign
             _currentLevel.BackgroundboardBlocks = _backgroundBlocks;
             
             _blocks.Clear();
-            for (int l = 0; l < _currentgameboard.GetLength(0); l++)
+            for (int l = 0; l < Currentgameboard.GetLength(0); l++)
             {
-                for (int k = 0; k < _currentgameboard.GetLength(1); k++)
+                for (int k = 0; k < Currentgameboard.GetLength(1); k++)
                 {
-                    _blocks.Add(BlockFactory.CreateBlock(_currentgameboard[l, k], k*50, l*50, _tileset));
+                    _blocks.Add(BlockFactory.CreateBlock(Currentgameboard[l, k], k*50, l*50, _tileset));
                 }
             }
             _currentLevel.Blocks = _blocks;
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            _currentLevel.Update(gameTime);
-            if (_currentLevel.Done)
-            {
-                NextLevel();
-            }
         }
         
         //Loop thru the blocks in the list and draw them if they are not null.
@@ -74,45 +58,6 @@ namespace gamedevGame.LevelDesign
             _currentLevel.Draw(batch);
         }
 
-        private void NextLevel()
-        {
-            //if last level done change gamestate to win
-            if (_currentLevelIndex == _allLevels.Length - 1)
-            {
-                ScreenSelector.GameState = GameState.Win;
-                Game1.SoundManager.Play(Sounds.Win);
-            }
-            else
-            {
-                _currentLevelIndex++;
-                _currentLevel = _allLevels[_currentLevelIndex];
-                _currentgameboard = _currentLevel.GameBoard;
-            
-                //resets the hero coins and position and changes position to the starting position of the next level
-                _currentLevel.Hero.Reset();
-                _currentLevel.Hero.Position = _currentLevel.HeroStartPosition;
-                _currentLevel.Hero.RespawnPos = _currentLevel.HeroStartPosition;
-
-                CreateBlocks();   
-            }
-        }
-        
-        public void Reset()
-        {
-            _currentLevel.Done = false;
-            _currentLevelIndex = 0;
-            _currentLevel = _allLevels[_currentLevelIndex];
-            _currentLevel.PortalSpawned = false;
-            _currentLevel.Done = false;
-            _currentgameboard = _currentLevel.GameBoard;
-            _currentLevel.Hero.Reset();
-            _currentLevel.Hero.Position = _currentLevel.HeroStartPosition;
-            _currentLevel.Hero.RespawnPos = _currentLevel.HeroStartPosition;
-            _currentLevel.SoundPlayed = false;
-            
-            CreateBlocks();
-        }
-        
     }
 }
 

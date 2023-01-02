@@ -1,13 +1,8 @@
-﻿using System;
-using gamedevGame.Characters;
-using gamedevGame.Collision;
-using gamedevGame.CollisionEvents;
-using gamedevGame.interfaces;
-using gamedevGame.LevelDesign;
+﻿using gamedevGame.Characters;
 using gamedevGame.LevelDesign.LevelBlocks;
 using gamedevGame.Sound;
 
-namespace gamedevGame.CollisionEvents
+namespace gamedevGame.Collision.CollisionEvents
 {
 	public class FlyCollision : CollideWithEvent
 	{
