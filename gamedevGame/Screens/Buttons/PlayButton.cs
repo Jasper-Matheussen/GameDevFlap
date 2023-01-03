@@ -18,11 +18,19 @@ public class PlayButton : Button
                 _graphics.PreferredBackBufferWidth = 1150;
                 _graphics.PreferredBackBufferHeight = 750;
                 _graphics.ApplyChanges();
-                _hero.Position = new Vector2(150, 200);
-                _hero.Speed = new Vector2(2, 1);
-                _hero.GravityPull = new Vector2(1, 1);
+                
+                SetHero();
+                
             }
         }
+    }
+
+    private void SetHero()
+    {
+        _hero.Position = new Vector2(150, 200);
+        _hero.Speed = new Vector2(2, 1);
+        _hero.GravityPull = new Vector2(1, 1);
+        _hero.RespawnPos = _hero.Position;
     }
 
     public PlayButton(Rectangle boundingBox, Rectangle position, ContentManager content, Color color, Hero hero, GraphicsDeviceManager graphics) : base(boundingBox, position, content, color)
