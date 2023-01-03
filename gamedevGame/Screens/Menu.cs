@@ -1,14 +1,13 @@
 using gamedevGame.Characters;
+using gamedevGame.Screens.Buttons;
 
 namespace gamedevGame.Screens;
 
 public class Menu : Screen
 {
-    public static bool StartGame { get; set; } = false;
-    private readonly GraphicsDeviceManager _graphics;
-    private Hero _hero;
-    private Color colorMuteButton = Color.Green;
-    private bool MuteClicked;
+    public static bool StartGame { get; set; }
+    private readonly Hero _hero;
+    private readonly List<Button> _buttons = new();
 
     public Menu(ContentManager content, GraphicsDeviceManager graphics, Hero hero) : base(content, graphics)
     {
@@ -17,7 +16,9 @@ public class Menu : Screen
         Graphics.PreferredBackBufferHeight = 600;
         Graphics.PreferredBackBufferWidth = 600;
         Graphics.ApplyChanges();
-        _graphics = graphics;
+        _buttons.Add(new ExitButton(QuitButton, QuitButtonPosition, content, Color.Red));
+        _buttons.Add(new PlayButton(PlayButton, PlayButtonPosition, content, Color.LightBlue, hero, graphics));
+        _buttons.Add(new MuteButton(MuteButton, MuteButtonPosition, content, Color.Green));
     }
 
     public override void Update(GameTime gameTime)
@@ -29,53 +30,23 @@ public class Menu : Screen
 
     public override void Draw(SpriteBatch spriteBatch)
     {
+        base.Draw(spriteBatch);
         _hero.Draw(spriteBatch);
-        spriteBatch.Draw(MenuSprite, PlayButtonPosition, PlayButton, Color.LightBlue);
-        spriteBatch.Draw(MenuSprite, QuitButtonPosition, QuitButton, Color.Red);
-        spriteBatch.Draw(MenuSprite, MuteButtonPosition, MuteButton, colorMuteButton);
     }
 
     protected override void HandleButtonClick()
     {
-        MouseState mouseState = Mouse.GetState();
-        if (mouseState.LeftButton == ButtonState.Pressed)
+        foreach (var button in _buttons)
         {
-            if (PlayButtonPosition.Contains(mouseState.Position))
-            {
-                StartGame = true;
-                Graphics.PreferredBackBufferWidth = 1150;
-                Graphics.PreferredBackBufferHeight = 750;
-                _graphics.ApplyChanges();
-                _hero.Position = new Vector2(150, 200);
-                _hero.Speed = new Vector2(2, 1);
-                _hero.GravityPull = new Vector2(1, 1);
-            }
-            if (QuitButtonPosition.Contains(mouseState.Position))
-            {
-                Environment.Exit(0);
-            }
-
-            if (MuteButtonPosition.Contains(mouseState.Position))
-            {
-                if (colorMuteButton == Color.Green && !MuteClicked)
-                {
-                    colorMuteButton = Color.Red;
-                    MediaPlayer.Pause();
-                    MuteClicked = true;
-                }
-                else if (!MuteClicked)
-                {
-                    MediaPlayer.Resume();
-                    colorMuteButton = Color.Green;
-                    MuteClicked = true;
-                }
-                
-            }
-            
+            button.Update();
         }
-        else
+    }
+    
+    protected override void HandleButtonClick(SpriteBatch spriteBatch)
+    {
+        foreach (var button in _buttons)
         {
-            MuteClicked = false;
+            button.Draw(spriteBatch);
         }
     }
 }

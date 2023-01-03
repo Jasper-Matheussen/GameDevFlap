@@ -5,8 +5,8 @@ namespace gamedevGame.Screens;
 public class Screen : IGameObject
 {
     protected readonly Texture2D MenuSprite;
-    protected SpriteFont Font;
-    protected SpriteFont TextFont;
+    protected readonly SpriteFont Font;
+    protected readonly SpriteFont TextFont;
     
     protected Rectangle PlayButton = new Rectangle(0,0, 600,200);
     protected Rectangle PlayButtonPosition = new Rectangle(200, 200, 400 / 2, 100 / 2);
@@ -34,9 +34,13 @@ public class Screen : IGameObject
 
     public virtual void Draw(SpriteBatch sprite)
     {
+        HandleButtonClick(sprite);
     }
     
     protected virtual void HandleButtonClick()
+    {
+    }
+    protected virtual void HandleButtonClick(SpriteBatch sprite)
     {
     }
 }

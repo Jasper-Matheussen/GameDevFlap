@@ -1,16 +1,19 @@
+using gamedevGame.Screens.Buttons;
 using gamedevGame.SreenSelections;
 
 namespace gamedevGame.Screens;
 
 public class EndGame : Screen
 {
+    private Button _exitButton;
     public EndGame(ContentManager content, GraphicsDeviceManager graphics) : base(content, graphics)
     {
-
+        _exitButton = new ExitButton(QuitButton, QuitButtonPosition, content, Color.Red);
     }
     public override void Draw(SpriteBatch sprite)
     {
         SelectGameText(sprite);
+        _exitButton.Draw(sprite);
         sprite.Draw(MenuSprite, QuitButtonPosition = new Rectangle(475, 340, 400 / 2, 100 / 2), QuitButton, Color.Red);
     }
 
@@ -31,9 +34,7 @@ public class EndGame : Screen
     
     protected override void HandleButtonClick()
     {
-        MouseState mouseState = Mouse.GetState();
         KeyboardState keyboardState = Keyboard.GetState();
-        
         if (keyboardState.IsKeyDown(Keys.Enter))
         {
             Menu.StartGame = false;
@@ -46,12 +47,6 @@ public class EndGame : Screen
             Graphics.ApplyChanges();
         }
         
-        if (mouseState.LeftButton == ButtonState.Pressed)
-        {
-            if (QuitButtonPosition.Contains(mouseState.Position))
-            {
-                Environment.Exit(0);
-            }
-        }
+        _exitButton.Update();
     }
 }
