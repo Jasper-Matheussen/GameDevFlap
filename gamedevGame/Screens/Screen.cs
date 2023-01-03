@@ -8,16 +8,16 @@ public class Screen : IGameObject
     protected readonly SpriteFont Font;
     protected readonly SpriteFont TextFont;
     
-    protected Rectangle PlayButton = new Rectangle(0,0, 600,200);
-    protected Rectangle PlayButtonPosition = new Rectangle(200, 200, 400 / 2, 100 / 2);
+    protected Rectangle PlayButton = new(0,0, 600,200);
+    protected Rectangle PlayButtonPosition = new(200, 200, 400 / 2, 100 / 2);
     
-    protected Rectangle QuitButton = new Rectangle(600,620, 610,206);
-    protected Rectangle QuitButtonPosition = new Rectangle(200, 270, 400 / 2, 100 / 2);
+    protected Rectangle QuitButton = new(600,620, 610,206);
+    protected Rectangle QuitButtonPosition = new(200, 270, 400 / 2, 100 / 2);
 
-    protected Rectangle MuteButton = new Rectangle(1820, 620, 200, 195);
-    protected Rectangle MuteButtonPosition = new Rectangle(540, 10, 50, 50);
+    protected Rectangle MuteButton = new(1820, 620, 200, 195);
+    protected Rectangle MuteButtonPosition = new(540, 10, 50, 50);
 
-    protected GraphicsDeviceManager Graphics;
+    protected readonly GraphicsDeviceManager Graphics;
     
     protected Screen(ContentManager content, GraphicsDeviceManager graphics)
     {

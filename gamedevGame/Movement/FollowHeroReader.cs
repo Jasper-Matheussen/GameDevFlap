@@ -5,49 +5,16 @@ namespace gamedevGame.Movement;
 
 public class FollowHeroReader : IIinputReader
 {
-    private Hero hero;
-    private Character follower;
+    private readonly Hero _hero;
+    private readonly Character _follower;
 
     public FollowHeroReader(Hero followhero, IMovable movable)
     {
-       hero = followhero;
-       follower = movable as Character;
+       _hero = followhero;
+       _follower = movable as Character;
     }
     public Vector2 ReadInput()
     {
-        
-
-        if (follower.Hitbox.Intersects(hero.Hitbox))
-        {
-            return Vector2.Zero;
-        }
-        else
-        {
-            return Vector2.Normalize(hero.Position - follower.Position);
-        }
-
-        Vector2 direction = Vector2.Zero;
-        if (follower.Position.X - hero.Position.X < 300 && follower.Position.X - hero.Position.X > -300)
-        {
-            if (hero.Position.X > follower.Position.X)
-            {
-                direction.X += 1;
-            }
-            else if (hero.Position.X < follower.Position.X)
-            {
-                direction.X -= 1;
-            }
-            if (hero.Position.Y > follower.Position.Y)
-            {
-                direction.Y += 1;
-            }
-            else if (hero.Position.Y < follower.Position.Y)
-            {
-                direction.Y -= 1;
-            }
-        }
-        return direction;
+        return _follower.Hitbox.Intersects(_hero.Hitbox) ? Vector2.Zero : Vector2.Normalize(_hero.Position - _follower.Position);
     }
-
-    public bool IsDestinationInput { get; }
 }

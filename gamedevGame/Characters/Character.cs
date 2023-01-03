@@ -2,13 +2,13 @@ using gamedevGame.Animation;
 using gamedevGame.interfaces;
 using gamedevGame.Movement;
 
-namespace gamedevGame;
+namespace gamedevGame.Characters;
 
 public class Character : IGameObject, IMovable
 {
     protected Texture2D Texture;
-    protected Animatie Animatie;
-    protected Animatie AnimatieLeft;
+    protected readonly Animatie Animatie;
+    protected readonly Animatie AnimatieLeft;
     
     protected int WidthCharacter;
     protected int HeightCharacter;
@@ -20,11 +20,11 @@ public class Character : IGameObject, IMovable
     public Rectangle Hitbox { get; set; }
 
     public int Health;
-    protected MovementManager MovementManager;
+    private readonly MovementManager _movementManager;
 
-    protected Character(ContentManager content)
+    protected Character()
     {
-        MovementManager = new MovementManager();
+        _movementManager = new MovementManager();
         Animatie = new Animatie();
         AnimatieLeft = new Animatie();
     }
@@ -33,6 +33,8 @@ public class Character : IGameObject, IMovable
     public virtual void Update(GameTime gameTime)
     {
         Move();
+        Animatie.Update(gameTime);
+        AnimatieLeft.Update(gameTime);
     }
 
     public virtual void Draw(SpriteBatch sprite)
@@ -42,20 +44,15 @@ public class Character : IGameObject, IMovable
     protected Rectangle CurrentDirectionAnimation()
     {
         //go left if input.readinput().X is positive
-        if (InputReader.ReadInput().X < 0)
-        {
-            return AnimatieLeft.CurrentFrame.SourceRectangle;
-        }
-        return Animatie.CurrentFrame.SourceRectangle;
-
+        return InputReader.ReadInput().X < 0 ? AnimatieLeft.CurrentFrame.SourceRectangle : Animatie.CurrentFrame.SourceRectangle;
     }
-    
-    public void Move()
+
+    private void Move()
     {
-        MovementManager.Move(this);
+        _movementManager.Move(this);
     }
 
-    public void CreateAnimation(int widthHero, int heightHero, int totalFrames)
+    protected void CreateAnimation(int widthHero, int heightHero, int totalFrames)
     {
         int nextFrame = 0;
         for (int frames = 0; frames < totalFrames; frames++)

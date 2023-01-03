@@ -1,14 +1,13 @@
-using gamedevGame.Animation;
 using gamedevGame.Movement;
 
 namespace gamedevGame.Characters;
 
-public class ShittingBird : Character
+public class TrolEnemy : Character
 {
 
     private readonly Color _color;
     
-    public ShittingBird(ContentManager content, Vector2 startPos, Vector2 moveTo, Vector2 speed, Color color) : base(content)
+    public TrolEnemy(ContentManager content, Vector2 startPos, Vector2 moveTo, Vector2 speed, Color color) : base()
     {
         WidthCharacter = 53;
         HeightCharacter = 40;
@@ -27,8 +26,6 @@ public class ShittingBird : Character
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        Animatie.Update(gameTime);
-        AnimatieLeft.Update(gameTime);
         Hitbox = new Rectangle((int)Position.X, (int)Position.Y, WidthCharacter-5, HeightCharacter -5);
     }
     

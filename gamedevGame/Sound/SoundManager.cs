@@ -12,18 +12,21 @@ public enum Sounds
 }
 public class SoundManager
 {
-    private readonly List<SoundEffect> _soundEffects = new();
+    private readonly List<SoundEffect> _soundEffects;
     private readonly Song _song;
 
     public SoundManager()
     {            
-        _soundEffects.Add(Game1.content.Load<SoundEffect>("flap"));
-        _soundEffects.Add(Game1.content.Load<SoundEffect>("hurt"));
-        _soundEffects.Add(Game1.content.Load<SoundEffect>("collect"));
-        _soundEffects.Add(Game1.content.Load<SoundEffect>("heart"));
-        _soundEffects.Add(Game1.content.Load<SoundEffect>("next"));
-        _soundEffects.Add(Game1.content.Load<SoundEffect>("gamover"));
-        _soundEffects.Add(Game1.content.Load<SoundEffect>("win"));
+        _soundEffects = new List<SoundEffect>
+        {
+            Game1.content.Load<SoundEffect>("flap"),
+            Game1.content.Load<SoundEffect>("hurt"),
+            Game1.content.Load<SoundEffect>("collect"),
+            Game1.content.Load<SoundEffect>("heart"),
+            Game1.content.Load<SoundEffect>("next"),
+            Game1.content.Load<SoundEffect>("gamover"),
+            Game1.content.Load<SoundEffect>("win")
+        };
         _song = Game1.content.Load<Song>("themesong");
     }
 

@@ -4,9 +4,9 @@ namespace gamedevGame.Movement;
 
 public class PointToPoint : IIinputReader
 {
-    private IMovable _movable;
-    private Vector2 _pointA;
-    private Vector2 _pointB;
+    private readonly IMovable _movable;
+    private readonly Vector2 _pointA;
+    private readonly Vector2 _pointB;
     private bool _hitPointB;
     private bool _hitPointA = true;
 
@@ -40,6 +40,4 @@ public class PointToPoint : IIinputReader
         }
         return direction;
     }
-
-    public bool IsDestinationInput { get; }
 }

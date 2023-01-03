@@ -5,8 +5,9 @@ namespace gamedevGame.Screens.Buttons;
 public class PlayButton : Button
 {
     private readonly Hero _hero;
-    private GraphicsDeviceManager _graphics;
-    protected override void HandleButtonClick()
+    private readonly GraphicsDeviceManager _graphics;
+
+    public override void HandleButtonClick()
     {
         MouseState mouseState = Mouse.GetState();
         if (mouseState.LeftButton == ButtonState.Pressed)

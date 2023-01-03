@@ -1,13 +1,15 @@
+using gamedevGame.interfaces;
+
 namespace gamedevGame.Screens.Buttons;
 
-public abstract class Button
+public abstract class Button : IButton
 {
-    public Rectangle BoundingBox { get; set; }
-    public Rectangle Position { get; set; }
-    public Texture2D Texture { get; set; }
-    public Color Color { get; set; }
+    private Rectangle BoundingBox { get; }
+    protected Rectangle Position { get; }
+    private Texture2D Texture { get; }
+    protected Color Color { get; set; }
 
-    public Button(Rectangle boundingBox, Rectangle position, ContentManager content, Color color)
+    protected Button(Rectangle boundingBox, Rectangle position, ContentManager content, Color color)
     {
         BoundingBox = boundingBox;
         Position = position;
@@ -25,7 +27,7 @@ public abstract class Button
         spriteBatch.Draw(Texture, Position, BoundingBox, Color);
     }
 
-    protected virtual void HandleButtonClick()
+    public virtual void HandleButtonClick()
     {
     }
 }

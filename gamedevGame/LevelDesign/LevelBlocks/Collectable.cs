@@ -1,4 +1,3 @@
-using gamedevGame.Collision;
 using gamedevGame.Collision.CollisionEvents;
 
 namespace gamedevGame.LevelDesign.LevelBlocks;

@@ -7,8 +7,8 @@ public class MuteButton : Button
     public MuteButton(Rectangle boundingBox, Rectangle position, ContentManager content, Color color) : base(boundingBox, position, content, color)
     {
     }
-    
-    protected override void HandleButtonClick()
+
+    public override void HandleButtonClick()
     {
         MouseState mouseState = Mouse.GetState();
         if (mouseState.LeftButton == ButtonState.Pressed)

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using gamedevGame.interfaces;
+﻿using gamedevGame.interfaces;
 
 namespace gamedevGame.Movement
 {
@@ -31,8 +29,8 @@ namespace gamedevGame.Movement
             {
                 _counter = 0;
             }
-         
-            var afstand = direction * movable.Speed;        
+
+            var afstand = direction * movable.Speed;
             movable.Position += afstand + gravityPull;
         }
     }

@@ -1,14 +1,11 @@
-﻿using System;
-namespace gamedevGame.Animation
-{
-    public class AnimationFrame
-    {
-        public Rectangle SourceRectangle { get; set; }
+﻿namespace gamedevGame.Animation;
 
-        public AnimationFrame(Rectangle rectangle)
-        {
-            SourceRectangle = rectangle;
-        }
+public class AnimationFrame
+{
+    public Rectangle SourceRectangle { get; }
+
+    public AnimationFrame(Rectangle rectangle)
+    {
+        SourceRectangle = rectangle;
     }
 }
-

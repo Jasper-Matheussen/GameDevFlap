@@ -5,7 +5,7 @@ namespace gamedevGame.Characters;
 
 public class Enemy : Character
 {
-    public Enemy(Vector2 startposition, Hero tofollow, ContentManager content) : base(content)
+    public Enemy(Vector2 startposition, Hero tofollow, ContentManager content) : base()
     {
         WidthCharacter = 50;
         HeightCharacter = 43;
@@ -23,8 +23,6 @@ public class Enemy : Character
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        Animatie.Update(gameTime);
-        AnimatieLeft.Update(gameTime);
         Hitbox = new Rectangle((int)Position.X, (int)Position.Y, WidthCharacter-5, HeightCharacter -5);
     }
     public override void Draw(SpriteBatch sprite)

@@ -1,5 +1,4 @@
 ﻿using gamedevGame.Characters;
-using gamedevGame.Collision;
 using gamedevGame.Collision.CollisionEvents;
 using gamedevGame.interfaces;
 
@@ -15,13 +14,13 @@ public class Block : ICollisonable
 	{
         public Rectangle BoundingBox { get; set; }
         public bool Passable { get; set; }
-        public Texture2D Texture { get; set; }
-        public CollideWithEvent CollideWithEvent { get; set; }
-        public bool IsVisible { get; set; } = true;
-        public bool IsPortal { get; set; } = false;
-        public int X { get; set; }
-        public int Y { get; set; }
-        public Rectangle Tile;
+        protected Texture2D Texture { get; init; }
+        protected CollideWithEvent CollideWithEvent { get; init; }
+        public bool IsVisible { get; protected init; } = true;
+        public bool IsPortal { get; protected init; }
+        public int X { get; protected init; }
+        public int Y { get; protected init; }
+        protected Rectangle Tile;
 
         public Block(int x, int y, Texture2D tilesetTexture)
         {

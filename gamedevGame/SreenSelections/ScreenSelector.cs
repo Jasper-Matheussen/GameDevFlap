@@ -12,10 +12,10 @@ public enum GameState { Menu, GameOver, Win, Playing }
 public class ScreenSelector : IGameObject
 {
     public static GameState GameState { get; set; }
-    public static Hero Hero { get; set; }
+    public static Hero Hero { get; private set; }
     public static LevelManager LevelManager;
-    private Menu _menu;
-    private EndGame _endGame;
+    private readonly Menu _menu;
+    private readonly EndGame _endGame;
     private bool _ispause;
 
     public ScreenSelector(ContentManager content, GraphicsDeviceManager grahics)

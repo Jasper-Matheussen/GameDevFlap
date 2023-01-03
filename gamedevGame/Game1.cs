@@ -7,7 +7,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
 
     private ScreenSelector _screenSelector;
-    readonly GraphicsDeviceManager _graphics;
+    private readonly GraphicsDeviceManager _graphics;
     public static ContentManager content { get; set; }
 
     public static SoundManager SoundManager;
