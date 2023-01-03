@@ -10,7 +10,7 @@ internal enum Direction
 public class Hero : Character
 {
     private Direction _facing;
-        
+    public bool IsCollidingWithBlock { get; set; }
     public int Coins { get; set; }
     public bool IsDead { get; set; }
     public Vector2 RespawnPos;
@@ -36,6 +36,7 @@ public class Hero : Character
 
     public override void Update(GameTime gameTime)
     {
+        IsCollidingWithBlock = false;
         base.Update(gameTime);
         CheckIfDead();
         Hitbox = new Rectangle((int)Position.X, (int)Position.Y, WidthCharacter-5, HeightCharacter -5);
