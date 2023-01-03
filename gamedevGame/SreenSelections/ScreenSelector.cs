@@ -7,7 +7,7 @@ using gamedevGame.Sound;
 
 namespace gamedevGame.SreenSelections;
 
-public enum GameState { Menu, GameOver, Win, Playing };
+public enum GameState { Menu, GameOver, Win, Playing }
 
 public class ScreenSelector : IGameObject
 {
@@ -31,6 +31,45 @@ public class ScreenSelector : IGameObject
     {
         DetectPause();
         DetectGameOver();
+        UpdateCurrentGameState(gameTime);
+    }
+
+    public void Draw(SpriteBatch sprite)
+    {
+        DrawCurrentGameState(sprite);
+    }
+    
+    private void DetectPause()
+    {
+        //if keyboard P is pressed then pause
+        KeyboardState keyboardState = Keyboard.GetState();
+        if (keyboardState.IsKeyDown(Keys.P))
+        {
+            _ispause = true;
+        }
+        if (keyboardState.IsKeyDown(Keys.O) || keyboardState.IsKeyDown(Keys.Space))
+        {
+            _ispause = false;
+        }
+    }
+    
+    private static void DetectGameOver()
+    {
+        if (Hero.IsDead)
+        {
+            GameState = GameState.GameOver;
+            Hero.IsDead = false;
+            PlayGameOverSound();
+        }
+    }
+
+    private static void PlayGameOverSound()
+    {
+        Game1.SoundManager.Play(Sounds.GameOver);
+    }
+
+    private void UpdateCurrentGameState(GameTime gameTime)
+    {
         switch (GameState)
         {
             case GameState.Menu:
@@ -61,7 +100,7 @@ public class ScreenSelector : IGameObject
         }
     }
 
-    public void Draw(SpriteBatch sprite)
+    private void DrawCurrentGameState(SpriteBatch sprite)
     {
         switch (GameState)
         {
@@ -82,34 +121,4 @@ public class ScreenSelector : IGameObject
                 throw new ArgumentOutOfRangeException();
         }
     }
-    
-    private void DetectPause()
-    {
-        //if keyboard P is pressed then pause
-        KeyboardState keyboardState = Keyboard.GetState();
-        if (keyboardState.IsKeyDown(Keys.P))
-        {
-            _ispause = true;
-        }
-        if (keyboardState.IsKeyDown(Keys.O) || keyboardState.IsKeyDown(Keys.Space))
-        {
-            _ispause = false;
-        }
-    }
-
-    private static void DetectGameOver()
-    {
-        if (Hero.IsDead)
-        {
-            GameState = GameState.GameOver;
-            Hero.IsDead = false;
-            PlayGameOverSound();
-        }
-    }
-
-    private static void PlayGameOverSound()
-    {
-        Game1.SoundManager.Play(Sounds.GameOver);
-    }
-
 }
