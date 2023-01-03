@@ -17,5 +17,11 @@ public class ExitButton : Button
             }
         }
     }
-    
+
+    public void DrawGameOverExitButton(SpriteBatch spriteBatch, Rectangle position)
+    {
+        Position = position;
+        spriteBatch.Draw(Texture, position, BoundingBox, Color);
+    }
+
 }

@@ -5,7 +5,7 @@ namespace gamedevGame.Screens;
 
 public class EndGame : Screen
 {
-    private Button _exitButton;
+    private ExitButton _exitButton;
     public EndGame(ContentManager content, GraphicsDeviceManager graphics) : base(content, graphics)
     {
         _exitButton = new ExitButton(QuitButton, QuitButtonPosition, content, Color.Red);
@@ -13,8 +13,8 @@ public class EndGame : Screen
     public override void Draw(SpriteBatch sprite)
     {
         SelectGameText(sprite);
-        _exitButton.Draw(sprite);
-        sprite.Draw(MenuSprite, QuitButtonPosition = new Rectangle(475, 340, 400 / 2, 100 / 2), QuitButton, Color.Red);
+        QuitButtonPosition = new Rectangle(475, 340, 400 / 2, 100 / 2);
+        _exitButton.DrawGameOverExitButton(sprite, QuitButtonPosition);
     }
 
     private void SelectGameText(SpriteBatch sprite)

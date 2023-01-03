@@ -4,9 +4,9 @@ namespace gamedevGame.Screens.Buttons;
 
 public abstract class Button : IButton
 {
-    private Rectangle BoundingBox { get; }
-    protected Rectangle Position { get; }
-    private Texture2D Texture { get; }
+    protected Rectangle BoundingBox { get; }
+    protected Rectangle Position { get; set; }
+    protected Texture2D Texture { get; }
     protected Color Color { get; set; }
 
     protected Button(Rectangle boundingBox, Rectangle position, ContentManager content, Color color)
