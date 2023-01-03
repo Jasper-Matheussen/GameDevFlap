@@ -1,7 +1,4 @@
-﻿using System;
-using gamedevGame.LevelDesign.LevelBlocks;
-
-namespace gamedevGame.LevelDesign
+﻿namespace gamedevGame.LevelDesign.LevelBlocks
 {
 	public class BlockFactory
 	{
@@ -10,7 +7,7 @@ namespace gamedevGame.LevelDesign
         int type, int x, int y, Texture2D tilesetTexture)
         {
             Block newBlock = null;
-          
+           //TODO: add enum for block types and use switch statement
             if (type == 1)
             {
                 newBlock = new Block(x, y, tilesetTexture);

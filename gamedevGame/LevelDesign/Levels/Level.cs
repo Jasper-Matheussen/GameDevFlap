@@ -1,13 +1,12 @@
-﻿using System;
-using System.Reflection.Metadata;
-using gamedevGame.Characters;
+﻿using gamedevGame.Characters;
 using gamedevGame.Collision;
+using gamedevGame.interfaces;
 using gamedevGame.LevelDesign.LevelBlocks;
 using gamedevGame.Sound;
 
 namespace gamedevGame.LevelDesign.Levels
 {
-	public abstract class Level
+	public abstract class Level : ILevel
 	{
 		#region Fields
 		
@@ -30,12 +29,12 @@ namespace gamedevGame.LevelDesign.Levels
 		#region Properties
 		
 		public Vector2 HeroStartPosition { get; set; }
-		public int[,] GameBoard { get; protected init; }
+		public int[,] GameBoard { get; init; }
 		public int[,] Backgroundboard { get; set; }
 		public List<Block> Blocks { get; set; }
 		public bool Done { get; set; }
 		public Hero Hero { get; }
-		protected List<Character> EnemyList { get; } = new();
+		public List<Character> EnemyList { get; } = new();
 		public List<Block> BackgroundboardBlocks { get; set; }
 		private int DiamondCount { get; set; }
 		public bool PortalSpawned { get; set; }

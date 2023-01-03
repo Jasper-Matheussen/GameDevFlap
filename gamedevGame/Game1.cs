@@ -1,11 +1,5 @@
-﻿
-using gamedevGame.Input;
-using gamedevGame.LevelDesign;
-using gamedevGame.Sound;
+﻿using gamedevGame.Sound;
 using gamedevGame.SreenSelections;
-using Microsoft.Xna.Framework.Graphics;
-using static System.Formats.Asn1.AsnWriter;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace gamedevGame;
 public class Game1 : Game
@@ -13,7 +7,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
 
     private ScreenSelector _screenSelector;
-    GraphicsDeviceManager graphics;
+    readonly GraphicsDeviceManager _graphics;
     public static ContentManager content { get; set; }
 
     public static SoundManager SoundManager;
@@ -21,10 +15,10 @@ public class Game1 : Game
     public Game1()
     {
         content = Content;
-        graphics = new GraphicsDeviceManager(this);
+        _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        graphics.IsFullScreen = false; //veranderen naar True voor full screen
+        _graphics.IsFullScreen = false; //veranderen naar True voor full screen
     }
 
     protected override void Initialize()
@@ -42,7 +36,7 @@ public class Game1 : Game
     private void InitializeGameObjects()
     {
         SoundManager = new SoundManager();
-        _screenSelector = new ScreenSelector(Content, graphics);
+        _screenSelector = new ScreenSelector(Content, _graphics);
     }
 
     protected override void Update(GameTime gameTime)
