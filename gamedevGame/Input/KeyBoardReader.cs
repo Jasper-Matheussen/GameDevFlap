@@ -23,10 +23,6 @@ public class KeyBoardReader : IIinputReader
         {
             direction.Y += 1;
         }
-        if (state.IsKeyDown(Keys.Up))
-        {
-            direction.Y -= 1;
-        }
         if (state.IsKeyDown(Keys.Space))
         {
             if (!_spaceBarPressed)
