@@ -1,7 +1,0 @@
-TODO:
-    - Minstens nog 1 enemy toevoegen
-        - Enemy moet heen en weer vliegen tussen 2 punten en iets kunnen schieten.
-    - Refactoring -> extra checken op SOLID en Design Patterns (Observer, Strategy, Factory, Singleton, etc.)
-   
-    
-    

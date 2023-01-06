@@ -27,6 +27,7 @@ public static class Collider
             Game1.SoundManager.Play(Sounds.Hurt);
             hero.Position = heroStartPosition;
             hero.Health--;
+            hero.StartBlinking(7, Color.Red);
         }
     }
 }

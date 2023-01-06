@@ -21,6 +21,7 @@ public class CollectEvent : CollideWithEvent
         }
         else
         {
+            hero.StartBlinking(8, Color.Green);
             Game1.SoundManager.Play(Sounds.Heart);
             hero.Health++;
         }

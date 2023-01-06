@@ -9,11 +9,11 @@ public class FlyCollision : CollideWithEvent
 	public override void Execute(Hero hero)
 	{
 		if (hero.IsCollidingWithBlock) return;
+		hero.StartBlinking(8, Color.Red);
 		Game1.SoundManager.Play(Sounds.Hurt);
 		hero.Respawn();
 		hero.Health--;
 		hero.IsCollidingWithBlock = true;
-
 
 	}
 
