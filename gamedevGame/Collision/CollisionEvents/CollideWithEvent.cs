@@ -13,6 +13,5 @@ public class CollideWithEvent
     }
     public virtual void Execute(Hero hero)
     {
-        Console.WriteLine(hero.Coins);
     }
 }

@@ -63,7 +63,6 @@ public class Character : IGameObject, IMovable
         //Creating frames for going left animation
         for (int i = 0; i < 4; i++)
         {
-            Console.WriteLine(nextFrame);
             AnimatieLeft.AddFrame(new AnimationFrame(new Rectangle(nextFrame, 0, widthHero, heightHero)));
             nextFrame += widthHero;
         }
